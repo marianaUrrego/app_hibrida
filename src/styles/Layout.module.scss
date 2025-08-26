@@ -1,0 +1,24 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+$nav-h: 64px;
+$nav-bottom-gap: 10px;  
+$fab-size: 58px;
+
+.screen { position: relative; min-height: 100%; padding-bottom: calc(#{$nav-h} + 46px); }
+.content { padding: 16px; padding-top: 8px; }
+
+.placeholder { margin: 24px auto; max-width: 320px; text-align: center; color: $muted; }
+.searchInput { width: 100%; padding: 12px 14px; border: 1px solid $line; border-radius: 12px; font-size: 14px; background: #fff; }
+
+.fab {
+  position: absolute;
+  left: 50%;
+  bottom: calc(#{$nav-bottom-gap} + #{$nav-h} - #{$fab-size} / 2);
+  transform: translateX(-50%);
+  width: $fab-size; height: $fab-size;
+  border-radius: 50%;
+  border: none; background: $yellow; color: #1f2937; font-size: 28px;
+  @include center; box-shadow: 0 10px 22px rgba(0,0,0,.18); cursor: pointer;
+  z-index: 30;
+}

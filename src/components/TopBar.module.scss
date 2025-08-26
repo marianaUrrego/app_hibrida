@@ -1,0 +1,17 @@
+@use '../styles/variables' as *;
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px; border-bottom: 1px solid $line; background: #fff;
+}
+
+.side { display: flex; gap: 10px; align-items: center; width: 88px; }
+
+.title { margin: 0; font-size: 18px; font-weight: 800; color: $fg; text-align: center; }
+
+.iconBtn {
+  width: 34px; height: 34px; border: none; background: transparent;
+  display: grid; place-items: center; border-radius: 10px; cursor: pointer;
+  &:hover { background: #f5f6f8; }
+}
+.icon { font-size: 18px; color: $blue; }

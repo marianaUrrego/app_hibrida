@@ -1,0 +1,3 @@
+@mixin center { display: grid; place-items: center; }
+@mixin text-sm { font-size: 12px; }
+@mixin elevation { box-shadow: $shadow; }
