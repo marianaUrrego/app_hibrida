@@ -1,0 +1,11 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.container { @include center; height: calc(100dvh - 210px); }
+
+.card {
+  width: 200px; height: 200px; border-radius: 22px; background: #f4f7f9;
+  @include center; box-shadow: $shadow;
+}
+.icon { font-size: 46px; color: $blue; opacity: .35; margin-bottom: 4px; }
+.text { text-align: center; font-weight: 800; color: #6b7280; }
