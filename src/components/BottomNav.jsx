@@ -5,7 +5,7 @@ import s from './BottomNav.module.scss'
 export default function BottomNav() {
   return (
     <nav className={s.nav}>
-      <NavLink to="/" end className={s.tab}>
+      <NavLink to="/home" end className={s.tab}>
         <FiHome className={s.tabIcon} />
         <div className={s.tabLabel}>Inicio</div>
       </NavLink>

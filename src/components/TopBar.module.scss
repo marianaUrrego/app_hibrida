@@ -1,17 +1,61 @@
 @use '../styles/variables' as *;
 
 .topbar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 12px; border-bottom: 1px solid $line; background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 1px solid $line;
+  background: #fff;
 }
 
-.side { display: flex; gap: 10px; align-items: center; width: 88px; }
+.side {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 88px;
+  justify-content: flex-start;
 
-.title { margin: 0; font-size: 18px; font-weight: 800; color: $fg; text-align: center; }
+  &:last-child {
+    justify-content: flex-end; /* El logo se pega a la derecha */
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: $fg;
+  font-family: 'Offside', sans-serif;
+  text-align: center;
+  flex: 1; /* asegura que el título quede centrado */
+}
 
 .iconBtn {
-  width: 34px; height: 34px; border: none; background: transparent;
-  display: grid; place-items: center; border-radius: 10px; cursor: pointer;
-  &:hover { background: #f5f6f8; }
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  color: $icon;
 }
-.icon { font-size: 18px; color: $blue; }
+
+.iconBtn:hover {
+  background: #f3f4f6;
+}
+
+.icon {
+  font-size: 18px;
+  color: $blue; /* azul de la paleta */
+}
+
+.logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+
