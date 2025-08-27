@@ -4,16 +4,22 @@ import s from './SearchFilter.module.scss';
 const SearchFilter = () => {
   return (
     <div className={s.filterContainer}>
-      <div className={s.filterType}>
-        <button className={s.filterButton}>Todo</button>
+      {/* Filtros de Tipo */}
+      <div className={s.filterRow}>
+        <span className={s.filterLabel}>Tipo:</span>
+        <button className={`${s.filterButton} ${s.active}`}>Todo</button>
         <button className={s.filterButton}>Gasto</button>
         <button className={s.filterButton}>Ingreso</button>
       </div>
-      <div className={s.filterCategory}>
-        <span>Categoría:</span>
-        <button className={s.filterButton}>Todo</button>
+
+      {/* Filtros de Categoría */}
+      <div className={s.filterRow}>
+        <span className={s.filterLabel}>Categoría:</span>
+        <button className={`${s.filterButton} ${s.active}`}>Todo</button>
         <button className={s.filterButton}>+</button>
       </div>
+
+      {/* Botones de acción */}
       <div className={s.actionButtons}>
         <button className={s.actionButton}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +28,7 @@ const SearchFilter = () => {
         </button>
         <button className={s.actionButton}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="currentColor"/>
+            <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.16.17Z" fill="currentColor"/>
           </svg>
         </button>
       </div>
