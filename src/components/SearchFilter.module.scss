@@ -34,17 +34,32 @@
 
 .actionButtons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 16px;
   width: 100%;
   margin-top: 12px;
 }
 
 .actionButton {
-  padding: 10px 20px; /* Ajustado padding */
+  padding: 12px;
   border: none;
   border-radius: 12px;
-  background-color: #000; /* Cambiar a negro */
-  color: #fff; /* Cambiar color de texto a blanco */
+  background-color: #f5f5f5; /* Fondo gris claro como en la imagen */
+  color: #333; /* Color oscuro para los iconos */
   cursor: pointer;
   transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.actionButton:hover {
+  background-color: #e8e8e8;
+}
+
+.actionButton svg {
+  width: 20px;
+  height: 20px;
 }
