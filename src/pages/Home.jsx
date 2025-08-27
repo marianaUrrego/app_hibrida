@@ -12,7 +12,6 @@ export default function Home() {
   return (
     <div className={layout.screen}>
       <TopBar onCalendarClick={() => setShowCalendar(!showCalendar)} />
-      <MonthHeader year="2025" month="Ago" gastos={0} ingresos={0} saldo={0} />
       <main className={layout.content}>
         {showCalendar && <CalendarComponent />}
         <EmptyState />
