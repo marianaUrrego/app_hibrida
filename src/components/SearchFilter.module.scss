@@ -7,15 +7,17 @@
 
 .filterType {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between; /* Cambiado a space-between */
   width: 100%;
+  margin-bottom: 12px; /* Añadido margen inferior */
 }
 
 .filterButton {
-  padding: 8px 16px;
+  padding: 10px 20px; /* Ajustado padding */
   border: none;
   border-radius: 12px;
-  background-color: #f0f0f0;
+  background-color: #ffffff; /* Cambiado a blanco */
+  color: #000; /* Añadido color de texto */
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -28,4 +30,21 @@
   margin-top: 12px;
   display: flex;
   align-items: center;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.actionButton {
+  padding: 10px 20px; /* Ajustado padding */
+  border: none;
+  border-radius: 12px;
+  background-color: #000; /* Cambiar a negro */
+  color: #fff; /* Cambiar color de texto a blanco */
+  cursor: pointer;
+  transition: background-color 0.3s;
 }

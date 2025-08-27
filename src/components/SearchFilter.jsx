@@ -14,6 +14,10 @@ const SearchFilter = () => {
         <button className={s.filterButton}>Todo</button>
         <button className={s.filterButton}>+</button>
       </div>
+      <div className={s.actionButtons}>
+        <button className={s.actionButton}>🔄</button> {/* Botón de reiniciar */}
+        <button className={s.actionButton}>✔️</button> {/* Botón de confirmar */}
+      </div>
     </div>
   );
 };

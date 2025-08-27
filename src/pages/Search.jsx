@@ -8,10 +8,10 @@ export default function Search() {
     <div className={layout.screen}>
       <TopBar />
       <main className={layout.content}>
-        <SearchFilter />
         <div className={layout.placeholder}>
           <input className={layout.searchInput} placeholder="Buscar..." />
         </div>
+        <SearchFilter />
       </main>
       <button className={layout.fab}>+</button>
       <BottomNav />
