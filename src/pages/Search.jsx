@@ -1,6 +1,7 @@
-import BottomNav from '../components/BottomNav.jsx'
-import TopBar from '../components/TopBar.jsx'
-import layout from '../styles/Layout.module.scss'
+import BottomNav from '../components/BottomNav.jsx';
+import TopBar from '../components/TopBar.jsx';
+import SearchFilter from '../components/SearchFilter.jsx';
+import layout from '../styles/Layout.module.scss';
 
 export default function Search() {
   return (
@@ -10,9 +11,10 @@ export default function Search() {
         <div className={layout.placeholder}>
           <input className={layout.searchInput} placeholder="Buscar..." />
         </div>
+        <SearchFilter />
       </main>
       <button className={layout.fab}>+</button>
       <BottomNav />
     </div>
-  )
+  );
 }
