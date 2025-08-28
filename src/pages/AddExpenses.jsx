@@ -50,7 +50,7 @@ export default function AddExpenses() {
   };
 
   const handleOk = () => {
-    if (!cat) return;                      // ⬅️ requiere categoría
+    if (!cat) return;
     const amount = evalExpr(expr);
     const valid = Number.isFinite(amount) ? Math.abs(amount) : 0;
     if (valid <= 0) return;
@@ -94,7 +94,7 @@ export default function AddExpenses() {
 
         <div className={s.divider} />
 
-        {/* ⬇️ Solo se muestra cuando hay categoría seleccionada */}
+        {/* se muestra cuando hay categoria seleccionada */}
         {cat && (
           <>
             <div className={s.amountRow}>

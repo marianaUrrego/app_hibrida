@@ -1,8 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-// tx: { id, type:'expense'|'income', category, amount:number, note, createdAt: ISO }
-
 function recomputeMonthlyTotals(list) {
   const map = {};
   for (const t of list) {
