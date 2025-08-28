@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router";
 import s from "../styles/Add.module.scss";
 import logo from "../assets/app-icon.png";
 import {
@@ -14,42 +15,31 @@ const CATS = [
   { key: "more",  label: "Ajustes",     Icon: FiPlus },
 ];
 
-export default function AddIncome({ onCancel, onSwitch }) {
-  const [type, setType]     = useState("ingreso");
+export default function AddIncome() {
   const [cat, setCat]       = useState("food");
   const [note, setNote]     = useState("");
   const [amount, setAmount] = useState("0");
 
   const press = (v) => {
-    if (v === "OK") { onCancel?.(); return; }
     if (v === "DEL") { const next = amount.length>1?amount.slice(0,-1):"0"; setAmount(next.endsWith(".")?next.slice(0,-1):next); return; }
-    if (v === ".") { if(!amount.includes(".")) setAmount(amount+"."); return; }
+    if (v === ".")   { if(!amount.includes(".")) setAmount(amount+"."); return; }
     if (v === "CLR") { setAmount("0"); return; }
+    if (v === "OK")  { return; }
     setAmount((p)=> (p==="0"?"":p)+v);
   };
 
   return (
     <div className={s.screen}>
       <div className={s.topbar}>
-        <button className={s.link} onClick={() => onCancel?.()}>Cancelar</button>
+        <NavLink to="/" className={s.link}>Cancelar</NavLink>
         <div className={s.title}>Agregar</div>
         <img src={logo} alt="LukApp" className={s.logo} />
       </div>
 
       <div className={s.body}>
         <div className={s.segmented}>
-          <button
-            className={s.seg}
-            onClick={() => onSwitch?.("expense")}
-          >
-            Gasto
-          </button>
-          <button
-            className={`${s.seg} ${s.active}`}
-            onClick={() => setType("ingreso")}
-          >
-            Ingreso
-          </button>
+          <NavLink to="/add/expense" className={s.seg}>Gasto</NavLink>
+          <button className={`${s.seg} ${s.active}`}>Ingreso</button>
         </div>
 
         <div className={s.grid}>

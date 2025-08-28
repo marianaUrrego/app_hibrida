@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router";
 import s from "../styles/Add.module.scss";
 import logo from "../assets/app-icon.png";
 import {
@@ -15,42 +16,31 @@ const CATS = [
   { key: "more",   label: "Ajustes", Icon: FiPlus },
 ];
 
-export default function AddExpenses({ onCancel, onSwitch }) {
-  const [type, setType]     = useState("gasto");
+export default function AddExpenses() {
   const [cat, setCat]       = useState("salary");
   const [note, setNote]     = useState("");
   const [amount, setAmount] = useState("0");
 
   const press = (v) => {
-    if (v === "OK") { onCancel?.(); return; }
     if (v === "DEL") { const next = amount.length>1?amount.slice(0,-1):"0"; setAmount(next.endsWith(".")?next.slice(0,-1):next); return; }
-    if (v === ".") { if(!amount.includes(".")) setAmount(amount+"."); return; }
+    if (v === ".")   { if(!amount.includes(".")) setAmount(amount+"."); return; }
     if (v === "CLR") { setAmount("0"); return; }
+    if (v === "OK")  { /* guarda y vuelve si quieres */ return; }
     setAmount((p)=> (p==="0"?"":p)+v);
   };
 
   return (
     <div className={s.screen}>
       <div className={s.topbar}>
-        <button className={s.link} onClick={() => onCancel?.()}>Cancelar</button>
+        <NavLink to="/" className={s.link}>Cancelar</NavLink>
         <div className={s.title}>Agregar</div>
         <img src={logo} alt="LukApp" className={s.logo} />
       </div>
 
       <div className={s.body}>
         <div className={s.segmented}>
-          <button
-            className={`${s.seg} ${type === "gasto" ? s.active : ""}`}
-            onClick={() => setType("gasto")}
-          >
-            Gasto
-          </button>
-          <button
-            className={`${s.seg} ${type === "ingreso" ? s.active : ""}`}
-            onClick={() => onSwitch?.("income")}
-          >
-            Ingreso
-          </button>
+          <button className={`${s.seg} ${s.active}`}>Gasto</button>
+          <NavLink to="/add/income" className={s.seg}>Ingreso</NavLink>
         </div>
 
         <div className={s.grid}>
