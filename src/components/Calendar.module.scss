@@ -8,7 +8,7 @@
   position: relative;
 }
 
-/* Header del calendario */
+
 .calendarHeader {
   display: flex;
   align-items: center;
@@ -79,7 +79,7 @@
   color: #666;
 }
 
-/* Dropdown menus */
+
 .dropdownMenu {
   position: absolute;
   top: 100%;
@@ -112,7 +112,7 @@
   }
 }
 
-/* Días de la semana */
+
 .weekDays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -135,7 +135,7 @@
   border: 1px solid #dee2e6;
 }
 
-/* Cuadrícula del calendario */
+
 .calendarGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -172,7 +172,7 @@
   }
 }
 
-/* Información de fecha seleccionada */
+
 .selectedDateInfo {
   margin-top: 16px;
   padding: 12px;
@@ -184,7 +184,7 @@
   border: 1px solid #e9ecef;
 }
 
-/* Responsive para móviles */
+
 @media (max-width: 480px) {
   .calendarContainer {
     padding: 16px;

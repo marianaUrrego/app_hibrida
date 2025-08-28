@@ -17,7 +17,7 @@
   justify-content: flex-start;
 
   &:last-child {
-    justify-content: flex-end; /* El logo se pega a la derecha */
+    justify-content: flex-end; 
   }
 }
 
@@ -28,7 +28,7 @@
   color: $fg;
   font-family: 'Offside', sans-serif;
   text-align: center;
-  flex: 1; /* asegura que el título quede centrado */
+  flex: 1;
 }
 
 .iconBtn {
@@ -49,7 +49,7 @@
 
 .icon {
   font-size: 18px;
-  color: $blue; /* azul de la paleta */
+  color: $blue; 
 }
 
 .logo {

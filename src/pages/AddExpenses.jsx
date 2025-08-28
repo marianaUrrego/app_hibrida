@@ -25,7 +25,7 @@ export default function AddExpenses() {
     if (v === "DEL") { const next = amount.length>1?amount.slice(0,-1):"0"; setAmount(next.endsWith(".")?next.slice(0,-1):next); return; }
     if (v === ".")   { if(!amount.includes(".")) setAmount(amount+"."); return; }
     if (v === "CLR") { setAmount("0"); return; }
-    if (v === "OK")  { /* guarda y vuelve si quieres */ return; }
+    if (v === "OK")  { return; }
     setAmount((p)=> (p==="0"?"":p)+v);
   };
 

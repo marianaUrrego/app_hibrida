@@ -6,7 +6,7 @@ $nav-bottom-gap: 12px;
 
 .nav {
   position: absolute;
-  left: 0; right: 0; bottom: $nav-bottom-gap;   /* ⬅️ dentro del marco */
+  left: 0; right: 0; bottom: $nav-bottom-gap;  
   height: $nav-h; background: #fff; border-top: 1px solid $line;
   display: flex; align-items: center; justify-content: space-around; padding: 0 20px;
   z-index: 20;

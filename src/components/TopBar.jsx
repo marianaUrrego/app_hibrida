@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import { FiSearch, FiCalendar } from "react-icons/fi";
 import s from "./TopBar.module.scss";
-import logo from "../assets/app-icon.png"; // ruta relativa correcta
+import logo from "../assets/app-icon.png";
 
 export default function TopBar({ onCalendarClick }) {
   return (

@@ -1,7 +1,7 @@
 @use './variables' as *;
 @use './mixins' as *;
 
-/* Global resets */
+
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; }
 body {

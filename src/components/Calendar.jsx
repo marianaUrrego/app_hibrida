@@ -7,62 +7,61 @@ function CalendarComponent() {
   const [showMonthSelector, setShowMonthSelector] = useState(false);
   const [showYearSelector, setShowYearSelector] = useState(false);
   
-  // Obtener el mes y año actual
+
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
   
-  // Nombres de meses
+
   
   const monthNames = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
   
-  // Nombres de días de la semana 
+
   const weekDays = ["D", "L", "M", "X", "J", "V", "S"];
   
-  // Debug: verificar que weekDays se esté definiendo correctamente
+
   console.log("Días de la semana:", weekDays);
   
-  // Generar años (desde 2000 hasta 2030)
+
   const years = [];
   for (let y = 2000; y <= 2030; y++) {
     years.push(y);
   }
   
-  // Función para obtener el primer día del mes
+  
   const getFirstDayOfMonth = (year, month) => {
     return new Date(year, month, 1).getDay();
   };
-  
-  // Función para obtener el número de días en el mes
+
   const getDaysInMonth = (year, month) => {
     return new Date(year, month + 1, 0).getDate();
   };
   
-  // Función para navegar al mes anterior
+
   const goToPreviousMonth = () => {
     setCurrentDate(new Date(currentYear, currentMonth - 1, 1));
   };
   
-  // Función para navegar al mes siguiente
+
   const goToNextMonth = () => {
     setCurrentDate(new Date(currentYear, currentMonth + 1, 1));
   };
   
-  // Función para cambiar mes
+
   const changeMonth = (monthIndex) => {
     setCurrentDate(new Date(currentYear, monthIndex, 1));
     setShowMonthSelector(false);
   };
   
-  // Función para cambiar año
+
   const changeYear = (year) => {
     setCurrentDate(new Date(year, currentMonth, 1));
     setShowYearSelector(false);
   };
   
-  // Función para seleccionar día
+
   const selectDay = (day, isCurrentMonth) => {
     if (isCurrentMonth) {
       const newSelectedDate = new Date(currentYear, currentMonth, day);
@@ -70,25 +69,25 @@ function CalendarComponent() {
     }
   };
   
-  // Generar días del mes
+
   const generateCalendarDays = () => {
     const days = [];
     const firstDay = getFirstDayOfMonth(currentYear, currentMonth);
     const totalDays = getDaysInMonth(currentYear, currentMonth);
     
-    // Agregar días del mes anterior para completar la primera semana
+
     const prevMonthDays = getDaysInMonth(currentYear, currentMonth - 1);
     for (let i = firstDay - 1; i >= 0; i--) {
       days.push({ day: prevMonthDays - i, isCurrentMonth: false });
     }
     
-    // Agregar días del mes actual
+
     for (let day = 1; day <= totalDays; day++) {
       days.push({ day, isCurrentMonth: true });
     }
     
-    // Agregar días del mes siguiente para completar la última semana
-    const remainingDays = 42 - days.length; // 6 semanas * 7 días
+
+    const remainingDays = 42 - days.length; 
     for (let day = 1; day <= remainingDays; day++) {
       days.push({ day, isCurrentMonth: false });
     }
@@ -98,7 +97,7 @@ function CalendarComponent() {
   
   const calendarDays = generateCalendarDays();
   
-  // Verificar si un día está seleccionado
+
   const isDaySelected = (day, isCurrentMonth) => {
     if (!selectedDate || !isCurrentMonth) return false;
     return selectedDate.getDate() === day && 
@@ -108,7 +107,6 @@ function CalendarComponent() {
   
   return (
     <div className={s.calendarContainer}>
-      {/* Header del calendario */}
       <div className={s.calendarHeader}>
         <button className={s.navButton} onClick={goToPreviousMonth}>
           &lt;
@@ -161,7 +159,7 @@ function CalendarComponent() {
         </div>
       </div>
       
-      {/* Días de la semana */}
+
       <div className={s.weekDays} style={{ 
         display: 'grid', 
         gridTemplateColumns: 'repeat(7, 1fr)', 
@@ -192,7 +190,7 @@ function CalendarComponent() {
         )}
       </div>
       
-      {/* Días del calendario */}
+
       <div className={s.calendarGrid}>
         {calendarDays.map(({ day, isCurrentMonth }, index) => (
           <div
@@ -207,7 +205,7 @@ function CalendarComponent() {
         ))}
       </div>
       
-      {/* Información de fecha seleccionada */}
+
       {selectedDate && (
         <div className={s.selectedDateInfo}>
           Fecha seleccionada: {selectedDate.toLocaleDateString('es-ES', {

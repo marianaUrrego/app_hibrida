@@ -2,19 +2,19 @@
 @use './variables' as *;
 @use './mixins' as *;
 
-/* footer/nav & FAB metrics */
+
 $nav-h: 64px;
 $nav-bottom-gap: 12px;
 $fab-size: 58px;
 
 .screen {
-  position: absolute;       /* ⬅️ ocupa toda la device-screen */
+  position: absolute;    
   inset: 0;
 }
 .content {
   padding: 16px;
   padding-top: 8px;
-  padding-bottom: calc(#{$nav-h} + 32px); /* espacio para no tapar contenido */
+  padding-bottom: calc(#{$nav-h} + 32px); 
 }
 
 .placeholder { margin: 24px auto; max-width: 320px; text-align: center; color: $muted; }
