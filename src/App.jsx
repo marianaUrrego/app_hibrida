@@ -7,6 +7,8 @@ import Profile from "./pages/Profile.jsx";
 import AddExpenses from "./pages/AddExpenses.jsx";
 import AddIncome from "./pages/AddIncome.jsx";
 import Splash from "./pages/Splash.jsx";
+import TxDetails from "./pages/TxDetails.jsx";
+import TxEdit from "./pages/TxEdit.jsx";
 
 export default function App() {
   const [ready, setReady] = useState(false);
@@ -30,6 +32,8 @@ export default function App() {
             <Route path="/yo" element={<Profile />} />
             <Route path="/add/expense" element={<AddExpenses />} />
             <Route path="/add/income" element={<AddIncome />} />
+            <Route path="/tx/:id" element={<TxDetails />} />
+            <Route path="/tx/:id/edit" element={<TxEdit />} />
           </Routes>
         )}
       </DeviceFrame>

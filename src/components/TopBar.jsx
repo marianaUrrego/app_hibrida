@@ -20,10 +20,6 @@ export default function TopBar({ onCalendarClick }) {
       </div>
 
       <h1 className={s.title}>LukApp</h1>
-
-      <div className={s.side}>
-        <img src={logo} alt="LukApp logo" className={s.logo} />
-      </div>
     </header>
   );
 }

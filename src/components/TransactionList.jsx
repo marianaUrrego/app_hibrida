@@ -1,23 +1,30 @@
 import React from "react";
 import { FiArrowDownCircle, FiArrowUpCircle } from "react-icons/fi";
 import s from "./TransactionList.module.scss";
+import { useNavigate } from "react-router";
 
-export default function TransactionList({ items, onItemClick }) {
+export default function TransactionList({ items }) {
+  const navigate = useNavigate();
+
   if (!items?.length) return null;
   return (
     <ul className={s.list}>
       {items.map((t) => {
         const d = new Date(t.createdAt);
-        const date = d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
+        const date = d.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+        });
         const isExpense = t.type === "expense";
         return (
           <li
             key={t.id}
             className={s.row}
-            onClick={() => onItemClick?.(t)}
+            onClick={() => navigate(`/tx/${t.id}`)}   // 👈 aquí usas navigate
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && onItemClick?.(t)}
+            onKeyDown={(e) => e.key === "Enter" && navigate(`/tx/${t.id}`)}
           >
             <div className={s.left}>
               <span className={`${s.badge} ${isExpense ? s.expense : s.income}`}>
@@ -29,7 +36,8 @@ export default function TransactionList({ items, onItemClick }) {
               </div>
             </div>
             <div className={`${s.amount} ${isExpense ? s.expense : s.income}`}>
-              {isExpense ? "-" : "+"}{Number(t.amount).toLocaleString()}
+              {isExpense ? "-" : "+"}
+              {Number(t.amount).toLocaleString()}
             </div>
           </li>
         );
