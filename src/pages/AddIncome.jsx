@@ -2,22 +2,21 @@ import { useState } from "react";
 import s from "../styles/Add.module.scss";
 import logo from "../assets/app-icon.png";
 import {
-  FiDollarSign, FiBarChart2, FiClock, FiGift, FiMoreHorizontal, FiPlus,
+  FiCoffee, FiTruck, FiUsers, FiShoppingCart, FiPlus,
   FiMenu, FiCalendar, FiDelete, FiCheck
 } from "react-icons/fi";
 
 const CATS = [
-  { key: "salary", label: "Salario", Icon: FiDollarSign },
-  { key: "inv",    label: "Inversiones", Icon: FiBarChart2 },
-  { key: "part",   label: "Tiempo\nparcial", Icon: FiClock },
-  { key: "prize",  label: "Premios", Icon: FiGift },
-  { key: "other",  label: "Otros", Icon: FiMoreHorizontal },
-  { key: "more",   label: "Ajustes", Icon: FiPlus },
+  { key: "food",  label: "Comida",      Icon: FiCoffee },
+  { key: "trans", label: "Transporte",  Icon: FiTruck },
+  { key: "social",label: "Social",      Icon: FiUsers },
+  { key: "shop",  label: "Compras",     Icon: FiShoppingCart },
+  { key: "more",  label: "Ajustes",     Icon: FiPlus },
 ];
 
-export default function AddExpenses({ onCancel, onSwitch }) {
-  const [type, setType]     = useState("gasto");
-  const [cat, setCat]       = useState("salary");
+export default function AddIncome({ onCancel, onSwitch }) {
+  const [type, setType]     = useState("ingreso");
+  const [cat, setCat]       = useState("food");
   const [note, setNote]     = useState("");
   const [amount, setAmount] = useState("0");
 
@@ -40,14 +39,14 @@ export default function AddExpenses({ onCancel, onSwitch }) {
       <div className={s.body}>
         <div className={s.segmented}>
           <button
-            className={`${s.seg} ${type === "gasto" ? s.active : ""}`}
-            onClick={() => setType("gasto")}
+            className={s.seg}
+            onClick={() => onSwitch?.("expense")}
           >
             Gasto
           </button>
           <button
-            className={`${s.seg} ${type === "ingreso" ? s.active : ""}`}
-            onClick={() => onSwitch?.("income")}
+            className={`${s.seg} ${s.active}`}
+            onClick={() => setType("ingreso")}
           >
             Ingreso
           </button>
@@ -57,14 +56,11 @@ export default function AddExpenses({ onCancel, onSwitch }) {
           {CATS.map(({ key, label, Icon }) => (
             <button
               key={key}
-              className={`${s.cat} ${key==="salary"?s.catGold:""} ${cat===key? s.catActive:""}`}
+              className={`${s.cat} ${cat===key? s.catActive:""}`}
               onClick={() => setCat(key)}
             >
               <span className={s.catIcon}><Icon/></span>
-              <span
-                className={s.catLabel}
-                dangerouslySetInnerHTML={{ __html: label.replace("\n","<br/>") }}
-              />
+              <span className={s.catLabel}>{label}</span>
             </button>
           ))}
         </div>
