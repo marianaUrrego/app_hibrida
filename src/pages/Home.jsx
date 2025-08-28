@@ -7,6 +7,7 @@ import AddExpenses from '../pages/AddExpenses.jsx';
 import AddIncome from '../pages/AddIncome.jsx';
 import layout from '../styles/Layout.module.scss';
 
+
 export default function Home() {
   const [showCalendar, setShowCalendar] = useState(false);
   const [addScreen, setAddScreen] = useState('none'); // 'none' | 'expense' | 'income'
@@ -37,6 +38,8 @@ export default function Home() {
           </>
         )}
       </main>
+      <button className={layout.fab}>+</button>
+      <BottomNav />
 
       {addScreen === 'none' && (
         <button

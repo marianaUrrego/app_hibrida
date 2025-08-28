@@ -1,11 +1,17 @@
 @use '../styles/variables' as *;
-@use '../styles/mixins' as *;
 
-.container { @include center; height: calc(100dvh - 210px); }
-
-.card {
-  width: 200px; height: 200px; border-radius: 22px; background: #f4f7f9;
-  @include center; box-shadow: $shadow;
+.container {
+  position: relative;
+  z-index: 10;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100dvh - 210px);
 }
-.icon { font-size: 46px; color: $blue; opacity: .35; margin-bottom: 4px; }
-.text { text-align: center; font-weight: 800; color: #6b7280; }
+
+.text {
+  font-size: 16px;
+  font-weight: 700;
+  color: $muted;
+  text-align: center;
+}
