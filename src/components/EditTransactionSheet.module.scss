@@ -1,0 +1,42 @@
+@use "../styles/variables" as *;
+
+.backdrop{
+  position: fixed; inset: 0; background: rgba(0,0,0,.25);
+  display: grid; place-items: end; z-index: 50;
+}
+
+.sheet{
+  width: 100%; max-width: 480px; margin: 0 auto;
+  background: #fff; border-top-left-radius: 16px; border-top-right-radius: 16px;
+  box-shadow: $shadow; padding: 12px 14px 14px;
+}
+
+.header{ display:flex; align-items:center; justify-content:space-between; }
+.title{ font-weight: 800; color: $fg; }
+.iconBtn{ border:0; background:transparent; color:$icon; font-size:20px; display:grid; place-items:center; }
+.spacer{ width:28px; }
+
+.body{ display:flex; flex-direction:column; gap:8px; margin: 10px 0 12px; }
+.label{ font-size:13px; color:$muted; }
+.input{
+  border:1px solid $line; border-radius:12px; padding:10px 12px; font-size:14px; color:$fg;
+  background:#fff;
+}
+
+.segmented{
+  display:flex; gap:12px; margin: 2px 0 8px;
+}
+.seg{
+  height:36px; padding:0 14px; border-radius:12px;
+  border:1px solid $line; background:#f3f5f7; color:$fg; font-weight:800; font-size:14px;
+}
+.active{ background:#111; color:#fff; border-color:#111; }
+
+.footer{
+  display:flex; gap:10px; justify-content:flex-end;
+}
+.btn{
+  border:0; border-radius:12px; padding:10px 14px; font-weight:800; display:flex; align-items:center; gap:8px;
+}
+.primary{ background:$blue; color:#fff; }
+.danger{ background:#ef4444; color:#fff; }

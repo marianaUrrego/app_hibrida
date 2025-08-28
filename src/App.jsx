@@ -6,7 +6,7 @@ import Search from "./pages/Search.jsx";
 import Profile from "./pages/Profile.jsx";
 import AddExpenses from "./pages/AddExpenses.jsx";
 import AddIncome from "./pages/AddIncome.jsx";
-import Splash from "./pages/Splash.jsx"; // ajusta la ruta si tu archivo está en otro lugar
+import Splash from "./pages/Splash.jsx";
 
 export default function App() {
   const [ready, setReady] = useState(false);
@@ -23,7 +23,7 @@ export default function App() {
           <Splash />
         ) : (
           <Routes>
-            {/* Al terminar el splash, "/" redirige a /home */}
+            {/*termina el splash, "/" redirige a /home */}
             <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<Home />} />
             <Route path="/buscar" element={<Search />} />
