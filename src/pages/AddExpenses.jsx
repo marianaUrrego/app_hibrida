@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import s from "../styles/Add.module.scss";
-import logo from "../assets/app-icon.png";
 import { useAppStore } from "../store/useAppStore.js";
 import {
   FiCoffee, FiTruck, FiUsers, FiShoppingCart, FiPlus,
@@ -32,13 +31,13 @@ function evalExpr(expr) {
 
 export default function AddExpenses() {
   const navigate = useNavigate();
-  const [cat, setCat]   = useState(null);   // ⬅️ sin selección inicial
+  const [cat, setCat]   = useState(null); 
   const [note, setNote] = useState("");
   const [expr, setExpr] = useState("0");
   const addTransaction  = useAppStore((s) => s.addTransaction);
 
   const toggleCat = (key) => {
-    setCat((prev) => (prev === key ? null : key)); // ⬅️ selecciona / deselecciona
+    setCat((prev) => (prev === key ? null : key));
     setExpr("0");
   };
 
@@ -70,7 +69,7 @@ export default function AddExpenses() {
       <div className={s.topbar}>
         <button className={s.link} onClick={() => navigate("/home")}>Cancelar</button>
         <div className={s.title}>Agregar</div>
-        <img src={logo} alt="LukApp" className={s.logo} />
+        <h1 className={s.title}>LukApp</h1>
       </div>
 
       <div className={s.body}>

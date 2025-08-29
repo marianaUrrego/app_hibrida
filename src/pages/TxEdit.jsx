@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import s from "../styles/Add.module.scss";
-import logo from "../assets/app-icon.png";
 import { useAppStore } from "../store/useAppStore.js";
 import {
   FiCoffee, FiTruck, FiUsers, FiShoppingCart, FiPlus,
@@ -82,7 +81,7 @@ export default function TxEdit() {
       <div className={s.topbar}>
         <button className={s.link} onClick={() => navigate(-1)}>Cancelar</button>
         <div className={s.title}>Editar</div>
-        <img src={logo} alt="LukApp" className={s.logo} />
+        <h1 className={s.title}>LukApp</h1>
       </div>
 
       <div className={s.body}>
