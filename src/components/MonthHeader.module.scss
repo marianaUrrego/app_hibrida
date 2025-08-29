@@ -11,24 +11,29 @@
 }
 
 .pill {
+  @include button-reset;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-width: 64px;
   text-align: center;
-  padding: 6px 4px 10px;
+  padding: 6px 4px;
   border-radius: 8px;
   font-weight: 800;
   color: $fg;
   position: relative;
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  cursor: pointer;
 
   &::after {
     content: "";
     position: absolute;
     left: 12px;
     right: 12px;
-    bottom: -6px;
+    bottom: -1px;
     height: 3px;
     background: $blue;
     border-radius: 3px;

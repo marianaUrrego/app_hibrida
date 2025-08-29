@@ -113,9 +113,3 @@
   background: #ef4444;
   color: #fff;
 }
-
-@media (min-width: 480px){
-  .hero{ grid-template-columns: 64px 1fr; }
-  .circle{ width: 64px; height: 64px; font-size: 28px; }
-  .row{ padding: 14px 0; }
-}
