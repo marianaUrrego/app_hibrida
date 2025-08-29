@@ -6,7 +6,6 @@
   background-color: white;
 }
 
-
 .filterRow {
   display: flex;
   align-items: center;
@@ -20,7 +19,6 @@
   min-width: 70px;
 }
 
-
 .filterButton {
   padding: 8px 16px;
   border: none;
@@ -33,18 +31,15 @@
   font-weight: 500;
   min-width: 65px;
   white-space: nowrap;
+
+  &:hover { background-color: #e8e8e8; }
 }
 
-.filterButton:hover {
-  background-color: #e8e8e8;
-}
-
-.filterButton.active {
+.isActive {
   background-color: #000;
-  color: white;
+  color: #fff;
   font-weight: 600;
 }
-
 
 .actionButtons {
   display: flex;
@@ -66,13 +61,13 @@
   justify-content: center;
   width: 48px;
   height: 48px;
+
+  &:hover { background-color: #e8e8e8; }
+
+  svg { width: 18px; height: 18px; }
 }
 
-.actionButton:hover {
-  background-color: #e8e8e8;
-}
-
-.actionButton svg {
-  width: 18px;
-  height: 18px;
+.primary {
+  background: #ffd700;
+  color: #1f2937;
 }
