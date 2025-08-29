@@ -6,115 +6,84 @@ function CalendarComponent() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [showMonthSelector, setShowMonthSelector] = useState(false);
   const [showYearSelector, setShowYearSelector] = useState(false);
-  
 
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
-  
 
-  
   const monthNames = [
-    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    "Enero","Febrero","Marzo","Abril","Mayo","Junio",
+    "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre",
   ];
-  
 
   const weekDays = ["D", "L", "M", "X", "J", "V", "S"];
-  
-
-  console.log("Días de la semana:", weekDays);
-  
 
   const years = [];
-  for (let y = 2000; y <= 2030; y++) {
-    years.push(y);
-  }
-  
-  
-  const getFirstDayOfMonth = (year, month) => {
-    return new Date(year, month, 1).getDay();
-  };
+  for (let y = 2000; y <= 2030; y++) years.push(y);
 
-  const getDaysInMonth = (year, month) => {
-    return new Date(year, month + 1, 0).getDate();
-  };
-  
+  const getFirstDayOfMonth = (year, month) => new Date(year, month, 1).getDay();
+  const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
 
-  const goToPreviousMonth = () => {
+  const goToPreviousMonth = () =>
     setCurrentDate(new Date(currentYear, currentMonth - 1, 1));
-  };
-  
 
-  const goToNextMonth = () => {
+  const goToNextMonth = () =>
     setCurrentDate(new Date(currentYear, currentMonth + 1, 1));
-  };
-  
 
   const changeMonth = (monthIndex) => {
     setCurrentDate(new Date(currentYear, monthIndex, 1));
     setShowMonthSelector(false);
   };
-  
 
   const changeYear = (year) => {
     setCurrentDate(new Date(year, currentMonth, 1));
     setShowYearSelector(false);
   };
-  
 
   const selectDay = (day, isCurrentMonth) => {
-    if (isCurrentMonth) {
-      const newSelectedDate = new Date(currentYear, currentMonth, day);
-      setSelectedDate(newSelectedDate);
-    }
+    if (!isCurrentMonth) return;
+    setSelectedDate(new Date(currentYear, currentMonth, day));
   };
-  
 
   const generateCalendarDays = () => {
     const days = [];
     const firstDay = getFirstDayOfMonth(currentYear, currentMonth);
     const totalDays = getDaysInMonth(currentYear, currentMonth);
-    
 
     const prevMonthDays = getDaysInMonth(currentYear, currentMonth - 1);
     for (let i = firstDay - 1; i >= 0; i--) {
       days.push({ day: prevMonthDays - i, isCurrentMonth: false });
     }
-    
 
     for (let day = 1; day <= totalDays; day++) {
       days.push({ day, isCurrentMonth: true });
     }
-    
 
-    const remainingDays = 42 - days.length; 
-    for (let day = 1; day <= remainingDays; day++) {
+    const remaining = 42 - days.length; // 6 filas * 7 columnas
+    for (let day = 1; day <= remaining; day++) {
       days.push({ day, isCurrentMonth: false });
     }
-    
     return days;
   };
-  
-  const calendarDays = generateCalendarDays();
-  
 
-  const isDaySelected = (day, isCurrentMonth) => {
-    if (!selectedDate || !isCurrentMonth) return false;
-    return selectedDate.getDate() === day && 
-           selectedDate.getMonth() === currentMonth && 
-           selectedDate.getFullYear() === currentYear;
-  };
-  
+  const calendarDays = generateCalendarDays();
+
+  const isDaySelected = (day, isCurrentMonth) =>
+    !!selectedDate &&
+    isCurrentMonth &&
+    selectedDate.getDate() === day &&
+    selectedDate.getMonth() === currentMonth &&
+    selectedDate.getFullYear() === currentYear;
+
   return (
     <div className={s.calendarContainer}>
       <div className={s.calendarHeader}>
-        <button className={s.navButton} onClick={goToPreviousMonth}>
-          &lt;
-        </button>
+        <button className={s.navButton} onClick={goToPreviousMonth}>&lt;</button>
+
         <h2 className={s.calendarTitle}>Calendario</h2>
+
         <div className={s.monthYearSelector}>
           <div className={s.monthSelector}>
-            <span 
+            <span
               className={s.monthYear}
               onClick={() => setShowMonthSelector(!showMonthSelector)}
             >
@@ -122,20 +91,21 @@ function CalendarComponent() {
             </span>
             {showMonthSelector && (
               <div className={s.dropdownMenu}>
-                {monthNames.map((month, index) => (
+                {monthNames.map((m, i) => (
                   <div
-                    key={index}
-                    className={`${s.dropdownItem} ${index === currentMonth ? s.active : ''}`}
-                    onClick={() => changeMonth(index)}
+                    key={i}
+                    className={`${s.dropdownItem} ${i === currentMonth ? s.active : ""}`}
+                    onClick={() => changeMonth(i)}
                   >
-                    {month}
+                    {m}
                   </div>
                 ))}
               </div>
             )}
           </div>
+
           <div className={s.yearSelector}>
-            <span 
+            <span
               className={s.monthYear}
               onClick={() => setShowYearSelector(!showYearSelector)}
             >
@@ -143,76 +113,51 @@ function CalendarComponent() {
             </span>
             {showYearSelector && (
               <div className={s.dropdownMenu}>
-                {years.map((year) => (
+                {years.map((y) => (
                   <div
-                    key={year}
-                    className={`${s.dropdownItem} ${year === currentYear ? s.active : ''}`}
-                    onClick={() => changeYear(year)}
+                    key={y}
+                    className={`${s.dropdownItem} ${y === currentYear ? s.active : ""}`}
+                    onClick={() => changeYear(y)}
                   >
-                    {year}
+                    {y}
                   </div>
                 ))}
               </div>
             )}
           </div>
+
           <span className={s.dropdownArrow}>▼</span>
         </div>
       </div>
-      
 
-      <div className={s.weekDays} style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(7, 1fr)', 
-        gap: '8px', 
-        marginBottom: '16px',
-        backgroundColor: '#f8f9fa',
-        padding: '8px',
-        borderRadius: '8px',
-        border: '1px solid #e9ecef'
-      }}>
-        {weekDays && weekDays.length > 0 ? (
-          weekDays.map((day, index) => (
-            <div key={index} className={s.weekDay} style={{
-              textAlign: 'center',
-              fontSize: '14px',
-              fontWeight: '700',
-              color: '#333',
-              padding: '8px 4px',
-              backgroundColor: 'white',
-              borderRadius: '4px',
-              border: '1px solid #dee2e6'
-            }}>
-              {day}
-            </div>
-          ))
-        ) : (
-          <div>Error: No se pudieron cargar los días de la semana</div>
-        )}
+      <div className={s.weekDays}>
+        {weekDays.map((d, i) => (
+          <div key={i} className={s.weekDay}>{d}</div>
+        ))}
       </div>
-      
 
       <div className={s.calendarGrid}>
-        {calendarDays.map(({ day, isCurrentMonth }, index) => (
+        {calendarDays.map(({ day, isCurrentMonth }, i) => (
           <div
-            key={index}
+            key={`${day}-${i}`}
             className={`${s.calendarDay} ${
               isCurrentMonth ? s.currentMonth : s.otherMonth
-            } ${isDaySelected(day, isCurrentMonth) ? s.selected : ''}`}
+            } ${isDaySelected(day, isCurrentMonth) ? s.selected : ""}`}
             onClick={() => selectDay(day, isCurrentMonth)}
           >
             {day}
           </div>
         ))}
       </div>
-      
 
       {selectedDate && (
         <div className={s.selectedDateInfo}>
-          Fecha seleccionada: {selectedDate.toLocaleDateString('es-ES', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
+          Fecha seleccionada:{" "}
+          {selectedDate.toLocaleDateString("es-ES", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
           })}
         </div>
       )}

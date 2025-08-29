@@ -11,11 +11,6 @@ export default function BottomNav() {
       </NavLink>
 
       <div className={`${s.tab} ${s.spacer}`} aria-hidden="true" />
-
-      <NavLink to="/yo" className={s.tab}>
-        <FiUser className={s.tabIcon} />
-        <div className={s.tabLabel}>yo</div>
-      </NavLink>
     </nav>
   )
 }
