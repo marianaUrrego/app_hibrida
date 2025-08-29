@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import s from "../styles/Add.module.scss";
 import { useAppStore } from "../store/useAppStore.js";
 import {
@@ -30,8 +30,12 @@ function evalExpr(expr) {
 }
 
 export default function AddExpenses() {
-  const navigate = useNavigate();
-  const [cat, setCat]   = useState(null); 
+  const navigate   = useNavigate();
+  const location   = useLocation();
+  const returnTo   = location.state?.from || "/home";
+  const preDateISO = location.state?.dateISO || new Date().toISOString();
+
+  const [cat, setCat]   = useState(null);
   const [note, setNote] = useState("");
   const [expr, setExpr] = useState("0");
   const addTransaction  = useAppStore((s) => s.addTransaction);
@@ -53,21 +57,23 @@ export default function AddExpenses() {
     const amount = evalExpr(expr);
     const valid = Number.isFinite(amount) ? Math.abs(amount) : 0;
     if (valid <= 0) return;
+
     addTransaction({
       id: crypto.randomUUID(),
       type: "expense",
       category: cat,
       amount: valid,
       note,
-      createdAt: new Date().toISOString(),
+      createdAt: preDateISO, // ← fecha elegida (o hoy)
     });
-    navigate("/home");
+
+    navigate(returnTo);
   };
 
   return (
     <div className={s.screen}>
       <div className={s.topbar}>
-        <button className={s.link} onClick={() => navigate("/home")}>Cancelar</button>
+        <button className={s.link} onClick={() => navigate(returnTo)}>Cancelar</button>
         <div className={s.title}>Agregar</div>
         <h1 className={s.title}>LukApp</h1>
       </div>
@@ -75,7 +81,12 @@ export default function AddExpenses() {
       <div className={s.body}>
         <div className={s.segmented}>
           <button className={`${s.seg} ${s.active}`}>Gasto</button>
-          <button className={s.seg} onClick={() => navigate("/add/income")}>Ingreso</button>
+          <button
+            className={s.seg}
+            onClick={() => navigate("/add/income", { state: { from: returnTo, dateISO: preDateISO } })}
+          >
+            Ingreso
+          </button>
         </div>
 
         <div className={s.grid}>
@@ -93,7 +104,6 @@ export default function AddExpenses() {
 
         <div className={s.divider} />
 
-        {/* se muestra cuando hay categoria seleccionada */}
         {cat && (
           <>
             <div className={s.amountRow}>

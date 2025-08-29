@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import s from "../styles/Add.module.scss";
 import { useAppStore } from "../store/useAppStore.js";
 import {
@@ -30,7 +30,11 @@ function evalExpr(expr) {
 }
 
 export default function AddIncome() {
-  const navigate = useNavigate();
+  const navigate   = useNavigate();
+  const location   = useLocation();
+  const returnTo   = location.state?.from || "/home";
+  const preDateISO = location.state?.dateISO || new Date().toISOString();
+
   const [cat, setCat]   = useState(null);
   const [note, setNote] = useState("");
   const [expr, setExpr] = useState("0");
@@ -49,32 +53,39 @@ export default function AddIncome() {
   };
 
   const handleOk = () => {
-    if (!cat) return;                 
+    if (!cat) return;
     const amount = evalExpr(expr);
     const valid = Number.isFinite(amount) ? Math.abs(amount) : 0;
     if (valid <= 0) return;
+
     addTransaction({
       id: crypto.randomUUID(),
       type: "income",
       category: cat,
       amount: valid,
       note,
-      createdAt: new Date().toISOString(),
+      createdAt: preDateISO, // ← fecha elegida (o hoy)
     });
-    navigate("/home");
+
+    navigate(returnTo);
   };
 
   return (
     <div className={s.screen}>
       <div className={s.topbar}>
-        <button className={s.link} onClick={() => navigate("/home")}>Cancelar</button>
+        <button className={s.link} onClick={() => navigate(returnTo)}>Cancelar</button>
         <div className={s.title}>Agregar</div>
         <h1 className={s.title}>LukApp</h1>
       </div>
 
       <div className={s.body}>
         <div className={s.segmented}>
-          <button className={s.seg} onClick={() => navigate("/add/expense")}>Gasto</button>
+          <button
+            className={s.seg}
+            onClick={() => navigate("/add/expense", { state: { from: returnTo, dateISO: preDateISO } })}
+          >
+            Gasto
+          </button>
           <button className={`${s.seg} ${s.active}`}>Ingreso</button>
         </div>
 
@@ -86,14 +97,16 @@ export default function AddIncome() {
               onClick={() => toggleCat(key)}
             >
               <span className={s.catIcon}><Icon/></span>
-              <span className={s.catLabel} dangerouslySetInnerHTML={{ __html: label.replace("\n","<br/>") }} />
+              <span
+                className={s.catLabel}
+                dangerouslySetInnerHTML={{ __html: label.replace("\n","<br/>") }}
+              />
             </button>
           ))}
         </div>
 
         <div className={s.divider} />
 
-        {/* Puedes decidir si aquí también ocultas el teclado hasta seleccionar categoría */}
         {cat && (
           <>
             <div className={s.amountRow}>
