@@ -2,6 +2,7 @@ import React from "react";
 import { FiArrowDownCircle, FiArrowUpCircle } from "react-icons/fi";
 import s from "./TransactionList.module.scss";
 import { useNavigate } from "react-router";
+import { CATEGORY_LABELS } from "../constants/categories";
 
 export default function TransactionList({ items }) {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function TransactionList({ items }) {
                 {isExpense ? <FiArrowDownCircle /> : <FiArrowUpCircle />}
               </span>
               <div className={s.meta}>
-                <strong className={s.cat}>{t.category}</strong>
+                <strong className={s.cat}>{CATEGORY_LABELS[t.category] || t.category}</strong>
                 <span className={s.date}>{date}</span>
               </div>
             </div>
