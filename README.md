@@ -33,36 +33,7 @@ Esta es una **aplicación web híbrida** desarrollada con **React**, **Vite** y 
 ## Estructura del proyecto
 
 ```
-
-src/
-├── assets/ # Recursos (íconos, imágenes, logos)
-├── components/ # Componentes reutilizables de la UI
-│ ├── BottomNav.jsx
-│ ├── DeviceFrame.jsx
-│ ├── EmptyState.jsx
-│ ├── MonthHeader.jsx
-│ └── TopBar.jsx
-├── pages/ # Vistas principales de la aplicación
-│ ├── Home.jsx
-│ ├── Profile.jsx
-│ ├── Search.jsx
-│ └── Splash.jsx
-├── styles/ # Estilos globales y modulares (SCSS)
-│ ├── DeviceFrame.module.scss
-│ ├── HomeWatermark.module.scss
-│ ├── Layout.module.scss
-│ ├── main.scss
-│ ├── mixins.scss
-│ └── variables.scss
-├── App.jsx
-└── main.jsx
-
-.eslintrc.js
-index.html
-package.json
-vite.config.js
-README.md
-.gitignore
+Link figma: https://www.figma.com/design/CBk2SBapWU80EGwZeJSQRC/Diseño-app-hibrída?node-id=0-1&p=f&t=stQ2IyQys74jzvG0-0
 
 ```
 

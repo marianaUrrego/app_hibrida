@@ -12,7 +12,6 @@ export default function SearchFilter({
 }) {
   return (
     <div className={s.filterContainer}>
-      {/* Tipo */}
       <div className={s.filterRow}>
         <span className={s.filterLabel}>Tipo:</span>
 
@@ -41,7 +40,6 @@ export default function SearchFilter({
         </button>
       </div>
 
-      {/* Categoría (ejemplo simple: Todo / +) */}
       <div className={s.filterRow}>
         <span className={s.filterLabel}>Categoría:</span>
 
@@ -62,7 +60,6 @@ export default function SearchFilter({
         </button>
       </div>
 
-      {/* Acciones */}
       <div className={s.actionButtons}>
         <button
           className={s.actionButton}
