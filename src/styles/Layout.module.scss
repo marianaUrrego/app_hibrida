@@ -11,6 +11,7 @@ $fab-size: 58px;
   position: absolute;    
   inset: 0;
 }
+
 .content {
   padding: 16px;
   padding-top: 8px;
@@ -30,4 +31,17 @@ $fab-size: 58px;
   border: none; background: $yellow; color: #1f2937; font-size: 28px;
   @include center; box-shadow: 0 10px 22px rgba(0,0,0,.18); cursor: pointer;
   z-index: 30;
+}
+
+.fab,
+.fab:link,
+.fab:visited,
+.fab:hover,
+.fab:focus,
+.fab:active {
+  text-decoration: none;
+}
+
+.fab {
+  line-height: 1;
 }

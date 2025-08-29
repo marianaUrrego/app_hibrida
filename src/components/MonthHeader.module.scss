@@ -1,65 +1,88 @@
 @use '../styles/variables' as *;
 @use '../styles/mixins' as *;
 
-.header { 
-  padding: 12px 12px 0; 
-  border-bottom: 1px solid $line; 
+.header {
+  padding: 12px 12px 0;
+  border-bottom: 1px solid $line;
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  column-gap: 16px;
+  align-items: end;
 }
 
 .pill {
-  display: inline-flex; 
-  flex-direction: column; 
-  align-items: center; 
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  min-width: 64px; 
-  text-align: center; 
-  padding: 6px 4px; 
-  border-radius: 8px; 
-  font-weight: 800; 
-  color: $fg; 
+  min-width: 64px;
+  text-align: center;
+  padding: 6px 4px 10px;
+  border-radius: 8px;
+  font-weight: 800;
+  color: $fg;
   position: relative;
 
   &::after {
-    content: ""; 
-    position: absolute; 
-    left: 12px; 
-    right: 12px; 
-    bottom: -10px;
-    height: 3px; 
-    background: $blue; 
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: -6px;
+    height: 3px;
+    background: $blue;
     border-radius: 3px;
   }
 }
 
-.month { 
-  @include text-sm; 
-  line-height: 1.1; 
+.month {
+  @include text-sm;
+  line-height: 1.1;
 }
 
-.totals { 
-  display: flex; 
-  gap: 18px; 
-  flex: 1; 
-  margin-top: 6px; 
-  margin-left: 88px; 
-  padding-bottom: 10px; 
+.totals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 8px;
+  align-items: end;
+  margin: 0;
+  padding: 0 0 6px;
 }
 
-.total { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 2px; 
+.total {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
 }
 
-.label { 
-  @include text-sm; 
-  color: $muted; 
+.label {
+  @include text-sm;
+  color: $muted;
 }
 
-.value { 
-  @include text-sm; 
-  font-weight: 800; 
+.value {
+  @include text-sm;
+  font-weight: 800;
 }
 
 .expense { color: $error; }
 .income  { color: $success; }
+
+@media (max-width: 360px) {
+  .header {
+    grid-template-columns: 72px 1fr;
+    column-gap: 12px;
+  }
+  .totals {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    column-gap: 16px;
+    row-gap: 10px;
+  }
+}
+
+@media (min-width: 600px) {
+  .header { column-gap: 24px; }
+  .totals { column-gap: 32px; }
+}

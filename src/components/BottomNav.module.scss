@@ -1,22 +1,39 @@
-
 @use '../styles/variables' as *;
 
 $nav-h: 64px;
 $nav-bottom-gap: 12px;
-
 .nav {
   position: absolute;
-  left: 0; right: 0; bottom: $nav-bottom-gap;  
-  height: $nav-h; background: #fff; border-top: 1px solid $line;
-  display: flex; align-items: center; justify-content: space-around; padding: 0 20px;
+  left: 0;
+  right: 0;
+  bottom: $nav-bottom-gap;
+  height: $nav-h;
+  background: #fff;
+  border-top: 1px solid $line;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  padding: 0 40px;
   z-index: 20;
 }
+
 .tab {
-  color: #9ca3af; display: flex; flex-direction: column; align-items: center; gap: 4px;
-  font-size: 11px; min-width: 64px; text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  min-width: 64px;
+  text-decoration: none;
   margin-top: -2px;
+  color: $fg;
+  font-weight: 800;
 }
-.tabIcon { font-size: 20px; color: #9ca3af; }
-.tab[aria-current="page"] { color: $fg; font-weight: 800; }
-.tab[aria-current="page"] .tabIcon { color: $blue; }
-.spacer { width: 64px; pointer-events: none; }
+
+.tabIcon { font-size: 20px; color: $blue; }
+
+.spacer {
+  width: 64px;
+  pointer-events: none;
+}

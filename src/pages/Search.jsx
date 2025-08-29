@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { useNavigate } from "react-router";
+import { useState } from "react";
+import { useNavigate, NavLink } from "react-router";
 import TopBar from "../components/TopBar.jsx";
 import BottomNav from "../components/BottomNav.jsx";
 import SearchFilter from "../components/SearchFilter.jsx";
@@ -20,29 +20,22 @@ export default function Search() {
   const transactions = useAppStore((s) => s.transactions);
 
   const [query, setQuery] = useState("");
-  const [type, setType] = useState("all");         
-  const [category, setCategory] = useState(null);  
-  const [results, setResults] = useState([]);
+  const [type, setType] = useState("all");
+  const [category, setCategory] = useState(null);
+  const [results, setResults] = useState(null);
 
-  const hasApplied = useMemo(() => results !== null && Array.isArray(results), [results]);
+  const hasApplied = results !== null;
 
   const handleApply = () => {
     const nq = norm(query).trim();
     const filtered = transactions
       .filter((t) => {
-        // 1) Nota por prefijo
         const noteOk = nq === "" ? true : norm(t.note || "").startsWith(nq);
-
-        // 2) Tipo
         const typeOk = type === "all" ? true : t.type === type;
-
-        // 3) Categoría
         const catOk = category ? t.category === category : true;
-
         return noteOk && typeOk && catOk;
       })
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
     setResults(filtered);
   };
 
@@ -50,12 +43,12 @@ export default function Search() {
     setQuery("");
     setType("all");
     setCategory(null);
-    setResults([]);
+    setResults(null);
   };
 
   return (
     <div className={layout.screen}>
-      <TopBar />
+      <TopBar onCalendarClick={() => navigate("/calendar")} />
 
       <main className={layout.content}>
         <div className={layout.placeholder} style={{ paddingBottom: 8 }}>
@@ -76,7 +69,6 @@ export default function Search() {
           onReset={handleReset}
         />
 
-        {/* Resultados */}
         {hasApplied && results.length > 0 && (
           <div style={{ marginTop: 8 }}>
             <TransactionList
@@ -92,6 +84,10 @@ export default function Search() {
           </p>
         )}
       </main>
+
+      <NavLink to="/add/expense" className={layout.fab} aria-label="Agregar">
+        +
+      </NavLink>
 
       <BottomNav />
     </div>
