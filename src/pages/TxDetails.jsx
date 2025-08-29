@@ -53,7 +53,7 @@ export default function TxDetails() {
   return (
     <div className={s.screen}>
       <header className={s.topbar}>
-        <button className={s.back} onClick={() => navigate(-1)}><FiArrowLeft/></button>
+        <button className={s.back} onClick={() => navigate("/home")}><FiArrowLeft/></button>
         <h1 className={s.title}>Detalles</h1>
         <div />
       </header>
