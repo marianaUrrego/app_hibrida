@@ -3,9 +3,9 @@ import { useNavigate, useParams } from "react-router";
 import s from "../styles/Add.module.scss";
 import { useAppStore } from "../store/useAppStore.js";
 import {
-  FiCoffee, FiTruck, FiUsers, FiShoppingCart, FiPlus,
+  FiCoffee, FiTruck, FiUsers, FiShoppingCart, FiMoreHorizontal,
   FiDollarSign, FiBarChart2, FiClock, FiGift,
-  FiMenu, FiCalendar, FiDelete, FiCheck
+  FiMenu, FiCalendar, FiDelete, FiCheck, FiPlus
 } from "react-icons/fi";
 
 const EXP = [
@@ -13,7 +13,7 @@ const EXP = [
   { key: "trans", label: "Transporte", Icon: FiTruck },
   { key: "social",label: "Social",     Icon: FiUsers },
   { key: "shop",  label: "Compras",    Icon: FiShoppingCart },
-  { key: "more",  label: "Ajustes",    Icon: FiPlus },
+  { key: "more", label: "Otros", Icon: FiMoreHorizontal },
 ];
 const INC = [
   { key: "salary", label: "Salario",         Icon: FiDollarSign },

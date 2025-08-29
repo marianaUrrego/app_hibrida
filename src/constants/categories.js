@@ -7,5 +7,5 @@ export const CATEGORY_LABELS = {
     inv: "Inversiones",
     part: "Tiempo parcial",
     prize: "Premios",
-    more: "Ajustes",
+    more: "Otros",
   };

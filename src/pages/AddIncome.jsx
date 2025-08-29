@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router";
 import s from "../styles/Add.module.scss";
 import { useAppStore } from "../store/useAppStore.js";
 import {
-  FiDollarSign, FiBarChart2, FiClock, FiGift, FiPlus,
+  FiDollarSign, FiBarChart2, FiClock, FiGift, FiMoreHorizontal,
   FiMenu, FiCalendar, FiDelete, FiCheck
 } from "react-icons/fi";
 
@@ -12,7 +12,7 @@ const CATS = [
   { key: "inv",    label: "Inversiones",     Icon: FiBarChart2 },
   { key: "part",   label: "Tiempo\nparcial", Icon: FiClock },
   { key: "prize",  label: "Premios",         Icon: FiGift },
-  { key: "more",   label: "Ajustes",         Icon: FiPlus },
+  { key: "more", label: "Otros", Icon: FiMoreHorizontal },
 ];
 
 function evalExpr(expr) {

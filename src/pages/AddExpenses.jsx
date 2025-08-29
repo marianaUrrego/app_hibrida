@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router";
 import s from "../styles/Add.module.scss";
 import { useAppStore } from "../store/useAppStore.js";
 import {
-  FiCoffee, FiTruck, FiUsers, FiShoppingCart, FiPlus,
+  FiCoffee, FiTruck, FiUsers, FiShoppingCart, FiMoreHorizontal,
   FiMenu, FiCalendar, FiDelete, FiCheck
 } from "react-icons/fi";
 
@@ -12,7 +12,7 @@ const CATS = [
   { key: "trans", label: "Transporte", Icon: FiTruck },
   { key: "social",label: "Social",     Icon: FiUsers },
   { key: "shop",  label: "Compras",    Icon: FiShoppingCart },
-  { key: "more",  label: "Ajustes",    Icon: FiPlus },
+  { key: "more", label: "Otros", Icon: FiMoreHorizontal },
 ];
 
 function evalExpr(expr) {
@@ -64,7 +64,7 @@ export default function AddExpenses() {
       category: cat,
       amount: valid,
       note,
-      createdAt: preDateISO, // ← fecha elegida (o hoy)
+      createdAt: preDateISO,
     });
 
     navigate(returnTo);
