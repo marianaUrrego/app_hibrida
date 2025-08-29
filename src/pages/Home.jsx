@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import TopBar from "../components/TopBar.jsx";
 import EmptyState from "../components/EmptyState.jsx";
 import BottomNav from "../components/BottomNav.jsx";
-import CalendarComponent from "../components/Calendar.jsx";
 import TransactionList from "../components/TransactionList.jsx";
 import MonthHeader from "../components/MonthHeader.jsx";
 import EditTransactionSheet from "../components/EditTransactionSheet.jsx";
@@ -11,7 +10,7 @@ import { useAppStore } from "../store/useAppStore.js";
 import layout from "../styles/Layout.module.scss";
 
 export default function Home() {
-  const [showCalendar, setShowCalendar] = useState(false);
+  const navigate = useNavigate();
   const [editing, setEditing] = useState(null);
 
   const byMonth = useAppStore((s) => s.byMonth);
@@ -20,13 +19,10 @@ export default function Home() {
 
   return (
     <div className={layout.screen}>
-      <TopBar onCalendarClick={() => setShowCalendar(!showCalendar)} />
+      <TopBar onCalendarClick={() => navigate("/calendar")} />
 
       <main className={layout.content}>
-        {showCalendar && <CalendarComponent />}
-
         <MonthHeader />
-
         {items.length ? (
           <TransactionList
             items={items}
@@ -37,7 +33,9 @@ export default function Home() {
         )}
       </main>
 
-      <NavLink to="/add/expense" className={layout.fab} aria-label="Agregar">+</NavLink>
+      <NavLink to="/add/expense" className={layout.fab} aria-label="Agregar">
+        +
+      </NavLink>
       <BottomNav />
 
       <EditTransactionSheet

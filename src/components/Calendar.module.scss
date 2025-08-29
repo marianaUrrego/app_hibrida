@@ -102,7 +102,6 @@
   }
 }
 
-/* Week header */
 .weekDays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -166,6 +165,43 @@
   color: $fg;
   text-align: center;
   border: 1px solid $line;
+}
+
+.scrim{
+  position: fixed;
+  inset: 0;
+  background: transparent; 
+  z-index: 49;
+}
+
+.menu{
+  position: fixed;
+  bottom: 92px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid $line;
+  border-radius: 12px;
+  box-shadow: $shadow;
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+  width: 200px;
+  z-index: 50;
+}
+
+.menuBtn{
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid $line;
+  background: #fff;
+  color: $fg;
+  font-weight: 800;
+  text-align: center;
+  transition: background .15s ease, transform .05s ease;
+
+  &:hover{ background: $cream; }
+  &:active{ transform: scale(.99); }
 }
 
 @media (max-width: 480px) {

@@ -9,6 +9,7 @@ import AddIncome from "./pages/AddIncome.jsx";
 import Splash from "./pages/Splash.jsx";
 import TxDetails from "./pages/TxDetails.jsx";
 import TxEdit from "./pages/TxEdit.jsx";
+import CalendarPage from "./pages/Calendar.jsx";
 
 export default function App() {
   const [ready, setReady] = useState(false);
@@ -25,7 +26,6 @@ export default function App() {
           <Splash />
         ) : (
           <Routes>
-            {/*termina el splash, "/" redirige a /home */}
             <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<Home />} />
             <Route path="/buscar" element={<Search />} />
@@ -34,6 +34,7 @@ export default function App() {
             <Route path="/add/income" element={<AddIncome />} />
             <Route path="/tx/:id" element={<TxDetails />} />
             <Route path="/tx/:id/edit" element={<TxEdit />} />
+            <Route path="/calendar" element={<CalendarPage />} />
           </Routes>
         )}
       </DeviceFrame>
