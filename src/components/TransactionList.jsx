@@ -22,7 +22,7 @@ export default function TransactionList({ items }) {
           <li
             key={t.id}
             className={s.row}
-            onClick={() => navigate(`/tx/${t.id}`)}   // 👈 aquí usas navigate
+            onClick={() => navigate(`/tx/${t.id}`)}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => e.key === "Enter" && navigate(`/tx/${t.id}`)}
