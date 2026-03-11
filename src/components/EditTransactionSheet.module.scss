@@ -12,15 +12,15 @@
 }
 
 .header{ display:flex; align-items:center; justify-content:space-between; }
-.title{ font-weight: 800; color: $fg; }
-.iconBtn{ border:0; background:transparent; color:$icon; font-size:20px; display:grid; place-items:center; }
+.title{ font-weight: 800; color: $fg; font-family: 'Offside', sans-serif; }
+.iconBtn{ border:0; background:transparent; color:$icon; font-size:20px; display:grid; place-items:center; font-family: 'Offside', sans-serif; }
 .spacer{ width:28px; }
 
 .body{ display:flex; flex-direction:column; gap:8px; margin: 10px 0 12px; }
-.label{ font-size:13px; color:$muted; }
+.label{ font-size:13px; color:$muted; font-family: 'Offside', sans-serif; }
 .input{
   border:1px solid $line; border-radius:12px; padding:10px 12px; font-size:14px; color:$fg;
-  background:#fff;
+  background:#fff; font-family: 'Offside', sans-serif;
 }
 
 .segmented{
@@ -28,7 +28,7 @@
 }
 .seg{
   height:36px; padding:0 14px; border-radius:12px;
-  border:1px solid $line; background:#f3f5f7; color:$fg; font-weight:800; font-size:14px;
+  border:1px solid $line; background:#f3f5f7; color:$fg; font-weight:800; font-size:14px; font-family: 'Offside', sans-serif;
 }
 .active{ background:#111; color:#fff; border-color:#111; }
 
@@ -36,7 +36,7 @@
   display:flex; gap:10px; justify-content:flex-end;
 }
 .btn{
-  border:0; border-radius:12px; padding:10px 14px; font-weight:800; display:flex; align-items:center; gap:8px;
+  border:0; border-radius:12px; padding:10px 14px; font-weight:800; display:flex; align-items:center; gap:8px; font-family: 'Offside', sans-serif;
 }
 .primary{ background:$blue; color:#fff; }
 .danger{ background:#ef4444; color:#fff; }

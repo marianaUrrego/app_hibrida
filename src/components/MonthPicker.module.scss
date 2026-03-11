@@ -30,6 +30,7 @@
   font-weight: 800;
   @include text-base;
   text-transform: capitalize;
+  font-family: 'Offside', sans-serif;
 }
 
 .arrow {
@@ -54,6 +55,7 @@
   padding: 6px 10px;
   background: #fff;
   @include text-sm;
+  font-family: 'Offside', sans-serif;
 }
 
 .grid {
@@ -71,6 +73,7 @@
   background: #fff;
   cursor: pointer;
   @include text-sm;
+  font-family: 'Offside', sans-serif;
 }
 
 .active {
@@ -92,6 +95,7 @@
   border: 0;
   padding: 10px 12px;
   @include text-sm;
+  font-family: 'Offside', sans-serif;
 }
 
 .ok {
@@ -102,6 +106,7 @@
   padding: 10px 16px;
   font-weight: 800;
   @include text-sm;
+  font-family: 'Offside', sans-serif;
 }
 
 .overlay {

@@ -7,7 +7,7 @@
   min-height: 100%;
   background: #fff;
   color: $fg;
-  font-family: 'Offside', ui-sans-serif, system-ui;
+  font-family: 'Offside', sans-serif;
   overflow: hidden;       
   padding: 10px 14px 10px;
   box-sizing: border-box;
@@ -29,8 +29,8 @@
   padding: 6px 2px 10px;
   border-bottom: 1px solid $line; 
 }
-.link{ justify-self: start;  background: transparent; border: 0; font-weight: 800; font-size: 18px; }
-.title{ justify-self: center; font-weight: 800; font-size: 18px; letter-spacing: .2px; }
+.link{ justify-self: start;  background: transparent; border: 0; font-weight: 800; font-size: 18px; font-family: 'Offside', sans-serif; }
+.title{ justify-self: center; font-weight: 800; font-size: 18px; letter-spacing: .2px; font-family: 'Offside', sans-serif; }
 .logo{ justify-self: end; width: 20px; height: 20px; border-radius: 4px; object-fit: contain; }
 
 
@@ -40,7 +40,7 @@
 .seg{
   height: 42px; padding: 0 16px; border-radius: 14px;
   border: 1px solid $line; background: #f3f5f7; color: $fg;
-  font-weight: 800; font-size: 16px; white-space: nowrap;
+  font-weight: 800; font-size: 16px; white-space: nowrap; font-family: 'Offside', sans-serif;
 }
 .active{ background: #111; color: #fff; border-color: #111; }
 
@@ -105,6 +105,7 @@
   line-height: 1.05;
   font-weight: 800;
   color: $fg;
+  font-family: 'Offside', sans-serif;
 }
 
 .catActive .catLabel {
@@ -122,14 +123,14 @@
   width: 36px; height: 28px; display: grid; place-items: center;
   border: 0; background: transparent; color: $blue; font-size: 20px;
 }
-.amount{ font-size: 22px; font-weight: 900; color: $blue; letter-spacing: .5px; }
+.amount{ font-size: 22px; font-weight: 900; color: $blue; letter-spacing: .5px; font-family: 'Offside', sans-serif; }
 
 
 .noteWrap{ padding: 6px 0 10px; }
 .note{
   width: 100%; height: 44px; padding: 0 14px;
   border: 1px solid $line; border-radius: 12px;
-  background: #f7fafc; font-size: 14px;
+  background: #f7fafc; font-size: 14px; font-family: 'Offside', sans-serif;
 }
 
 
@@ -141,7 +142,7 @@
   height: 56px; border-radius: 14px; border: none;
   font-size: 20px; font-weight: 900; color: #121926;
   background: #fbfdff;
-  box-shadow: 6px 10px 18px rgba(0,0,0,.10), inset 0 0 0 1px rgba(0,0,0,.03);
+  box-shadow: 6px 10px 18px rgba(0,0,0,.10), inset 0 0 0 1px rgba(0,0,0,.03); font-family: 'Offside', sans-serif;
 }
-.ghost{ background: #eef3f7; font-size: 19px; }
-.ok{ background: $yellow; color: #1f2937; display: grid; place-items: center; font-size: 20px; font-weight: 900; }
+.ghost{ background: #eef3f7; font-size: 19px; font-family: 'Offside', sans-serif; }
+.ok{ background: $yellow; color: #1f2937; display: grid; place-items: center; font-size: 20px; font-weight: 900; font-family: 'Offside', sans-serif; }

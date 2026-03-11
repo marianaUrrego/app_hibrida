@@ -27,6 +27,7 @@
   text-align: center;
   font-weight: 800;
   font-size: clamp(16px, 1.8vw, 18px);
+  font-family: 'Offside', sans-serif;
 }
 
 .body{
@@ -57,6 +58,7 @@
   font-weight: 800;
   font-size: clamp(20px, 4.8vw, 26px);
   line-height: 1.05;
+  font-family: 'Offside', sans-serif;
 }
 
 .group{ margin-top: 4px; border-top: 1px solid $line; }
@@ -71,6 +73,7 @@
 .label{
   color: $muted;
   font-size: 14px;
+  font-family: 'Offside', sans-serif;
 }
 .value{
   font-weight: 800;
@@ -78,17 +81,20 @@
   text-align: right;
   color: $fg;
   word-break: break-word;
+  font-family: 'Offside', sans-serif;
 }
 .valueStrong{
   display: inline-block;
   font-weight: 900;
   font-size: clamp(15px, 3.8vw, 18px);
+  font-family: 'Offside', sans-serif;
 }
 .sub{
   display: block;
   color: $muted;
   font-size: 12px;
   margin-top: 2px;
+  font-family: 'Offside', sans-serif;
 }
 
 .footer{
@@ -108,6 +114,7 @@
   font-weight: 800;
   background: #eef2f7;
   color: $fg;
+  font-family: 'Offside', sans-serif;
 }
 .danger{
   background: #ef4444;

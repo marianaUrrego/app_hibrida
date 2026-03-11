@@ -28,6 +28,7 @@
   padding: 8px;
   border-radius: 6px;
   transition: background-color .2s ease;
+  font-family: 'Offside', sans-serif;
 
   &:hover { background-color: #f5f5f5; }
 }
@@ -37,6 +38,7 @@
   font-weight: 800;
   color: $fg;
   margin: 0;
+  font-family: 'Offside', sans-serif;
 }
 
 .monthYearSelector {
@@ -48,6 +50,7 @@
   border-radius: 6px;
   transition: background-color .2s ease;
   position: relative;
+  font-family: 'Offside', sans-serif;
 
   &:hover { background-color: #f5f5f5; }
 }
@@ -63,6 +66,7 @@
   padding: 4px 8px;
   border-radius: 4px;
   transition: background-color .2s ease;
+  font-family: 'Offside', sans-serif;
 
   &:hover { background-color: #f0f0f0; }
 }
@@ -70,6 +74,7 @@
 .dropdownArrow {
   font-size: 10px;
   color: $muted;
+  font-family: 'Offside', sans-serif;
 }
 
 .dropdownMenu {
@@ -92,6 +97,7 @@
   transition: background-color .2s ease;
   font-size: 14px;
   color: $fg;
+  font-family: 'Offside', sans-serif;
 
   &:hover { background-color: #f5f5f5; }
 
@@ -122,6 +128,7 @@
   background-color: #fff;
   border-radius: 4px;
   border: 1px solid #dee2e6;
+  font-family: 'Offside', sans-serif;
 }
 
 .calendarGrid {
@@ -140,6 +147,7 @@
   border-radius: 6px;
   cursor: pointer;
   transition: all .2s ease;
+  font-family: 'Offside', sans-serif;
 
   &.currentMonth {
     color: $fg;
@@ -165,6 +173,7 @@
   color: $fg;
   text-align: center;
   border: 1px solid $line;
+  font-family: 'Offside', sans-serif;
 }
 
 .scrim{
@@ -199,6 +208,7 @@
   font-weight: 800;
   text-align: center;
   transition: background .15s ease, transform .05s ease;
+  font-family: 'Offside', sans-serif;
 
   &:hover{ background: $cream; }
   &:active{ transform: scale(.99); }

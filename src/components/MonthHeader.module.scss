@@ -27,6 +27,7 @@
   box-shadow: none;
   border: 0;
   cursor: pointer;
+  font-family: 'Offside', sans-serif;
 
   &::after {
     content: "";
@@ -43,6 +44,7 @@
 .month {
   @include text-sm;
   line-height: 1.1;
+  font-family: 'Offside', sans-serif;
 }
 
 .totals {
@@ -53,6 +55,7 @@
   align-items: end;
   margin: 0;
   padding: 0 0 6px;
+  font-family: 'Offside', sans-serif;
 }
 
 .total {
@@ -65,11 +68,13 @@
 .label {
   @include text-sm;
   color: $muted;
+  font-family: 'Offside', sans-serif;
 }
 
 .value {
   @include text-sm;
   font-weight: 800;
+  font-family: 'Offside', sans-serif;
 }
 
 .expense { color: $error; }

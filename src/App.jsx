@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { Capacitor } from "@capacitor/core";
 import DeviceFrame from "./components/DeviceFrame.jsx";
 import Home from "./pages/Home.jsx";
 import Search from "./pages/Search.jsx";
@@ -13,31 +14,32 @@ import CalendarPage from "./pages/Calendar.jsx";
 
 export default function App() {
   const [ready, setReady] = useState(false);
+  const isNative = Capacitor.isNativePlatform();
 
   useEffect(() => {
     const t = setTimeout(() => setReady(true), 1500);
     return () => clearTimeout(t);
   }, []);
 
+  const appContent = !ready ? (
+    <Splash />
+  ) : (
+    <Routes>
+      <Route path="/" element={<Navigate to="/home" replace />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/buscar" element={<Search />} />
+      <Route path="/yo" element={<Profile />} />
+      <Route path="/add/expense" element={<AddExpenses />} />
+      <Route path="/add/income" element={<AddIncome />} />
+      <Route path="/tx/:id" element={<TxDetails />} />
+      <Route path="/tx/:id/edit" element={<TxEdit />} />
+      <Route path="/calendar" element={<CalendarPage />} />
+    </Routes>
+  );
+
   return (
     <BrowserRouter>
-      <DeviceFrame>
-        {!ready ? (
-          <Splash />
-        ) : (
-          <Routes>
-            <Route path="/" element={<Navigate to="/home" replace />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/buscar" element={<Search />} />
-            <Route path="/yo" element={<Profile />} />
-            <Route path="/add/expense" element={<AddExpenses />} />
-            <Route path="/add/income" element={<AddIncome />} />
-            <Route path="/tx/:id" element={<TxDetails />} />
-            <Route path="/tx/:id/edit" element={<TxEdit />} />
-            <Route path="/calendar" element={<CalendarPage />} />
-          </Routes>
-        )}
-      </DeviceFrame>
+      {isNative ? appContent : <DeviceFrame>{appContent}</DeviceFrame>}
     </BrowserRouter>
   );
 }
