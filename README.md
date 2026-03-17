@@ -12,6 +12,22 @@ LukApp es una aplicación pensada especialmente para estudiantes universitarios 
 
 ---
 
+## Funcionalidades clave de la app
+
+- **Gestión de ingresos**: Registrar y categorizar ingresos salariales, inversiones, trabajos parciales y premios.
+
+- **Control de gastos**: Registrar gastos en categorías como comida, transporte, social y compras.
+
+- **Edición de transacciones**: Modificar monto, categoría y nota de transacciones existentes.
+
+- **Eliminación de movimientos**: Borrar transacciones con confirmación de seguridad.
+
+- **Búsqueda inteligente**: Buscar transacciones por nota o categoría con filtros por tipo.
+
+- **Detalle de transacción**: Visualización completa de cada movimiento con fecha y monto formateado.
+
+---
+
 ## Descripción del proyecto
 
 Esta es una **aplicación web híbrida** desarrollada con **React**, **Vite** y **Sass**. Permite navegar entre distintas vistas y comportarse con estilo modular y responsive.
@@ -25,6 +41,8 @@ Esta es una **aplicación web híbrida** desarrollada con **React**, **Vite** y 
 - [Vite](https://vitejs.dev/) (bundler)
 
 - [Sass](https://sass-lang.com/) para estilos modulares y escalables
+
+- [Capacitor](https://capacitorjs.com/) para apps híbridas
 
 - Git / GitHub para control de versiones
 
