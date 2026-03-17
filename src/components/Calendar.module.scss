@@ -157,6 +157,17 @@
 
   &.otherMonth { color: #c7cbd1; }
 
+  &.disabledFuture {
+    color: #c7cbd1;
+    background-color: #f8f9fb;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover {
+      background-color: #f8f9fb;
+    }
+  }
+
   &.selected {
     background-color: $yellow;
     color: #1f2937;

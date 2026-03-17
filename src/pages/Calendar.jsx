@@ -12,14 +12,24 @@ function startOfDay(d) {
   return x;
 }
 
+function isFutureDate(d) {
+  return startOfDay(d) > startOfDay(new Date());
+}
+
 export default function CalendarPage() {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(startOfDay(new Date()));
   const [openMenu, setOpenMenu] = useState(false);
 
   const go = (type) => {
+  if (isFutureDate(selectedDate)) {
+    setOpenMenu(false);
+    return;
+  }
+
     const dateISO = startOfDay(selectedDate).toISOString();
     setOpenMenu(false);
+
     navigate(type === "expense" ? "/add/expense" : "/add/income", {
       state: { dateISO, from: "/calendar" },
     });
@@ -39,7 +49,10 @@ export default function CalendarPage() {
       <button
         className={layout.fab}
         aria-label="Agregar"
-        onClick={() => setOpenMenu((v) => !v)}
+        onClick={() => {
+          if (isFutureDate(selectedDate)) return;
+          setOpenMenu((v) => !v);
+        }}
       >
         +
       </button>

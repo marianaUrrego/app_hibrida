@@ -26,18 +26,42 @@ function CalendarComponent({ value, onChange }) {
   const years = [];
   for (let y = 2000; y <= 2030; y++) years.push(y);
 
+  const startOfDay = (d) => {
+    const x = new Date(d);
+    x.setHours(0, 0, 0, 0);
+    return x;
+  };
+
+  const today = startOfDay(new Date());
+
   const getFirstDayOfMonth = (year, month) => new Date(year, month, 1).getDay();
   const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
 
   const goToPreviousMonth = () => setCurrentDate(new Date(currentYear, currentMonth - 1, 1));
-  const goToNextMonth = () => setCurrentDate(new Date(currentYear, currentMonth + 1, 1));
+  const goToNextMonth = () => {
+    const nextMonthDate = new Date(currentYear, currentMonth + 1, 1);
+    const currentRealMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    if (nextMonthDate > currentRealMonth) return;
+
+    setCurrentDate(nextMonthDate);
+  };
 
   const changeMonth = (idx) => { setCurrentDate(new Date(currentYear, idx, 1)); setShowMonthSelector(false); };
   const changeYear = (y) => { setCurrentDate(new Date(y, currentMonth, 1)); setShowYearSelector(false); };
 
+  const isFutureDay = (day, isCurrentMonth) => {
+    if (!isCurrentMonth) return false;
+    const d = startOfDay(new Date(currentYear, currentMonth, day));
+    return d > today;
+  };
+
   const selectDay = (day, isCurrentMonth) => {
     if (!isCurrentMonth) return;
-    const d = new Date(currentYear, currentMonth, day);
+
+    const d = startOfDay(new Date(currentYear, currentMonth, day));
+    if (d > today) return;
+
     setSelectedDate(d);
     onChange?.(d);
   };
@@ -102,15 +126,20 @@ function CalendarComponent({ value, onChange }) {
       </div>
 
       <div className={s.calendarGrid}>
-        {calendarDays.map(({ day, isCurrentMonth }, i) => (
-          <div
-            key={i}
-            className={`${s.calendarDay} ${isCurrentMonth ? s.currentMonth : s.otherMonth} ${isDaySelected(day, isCurrentMonth) ? s.selected : ""}`}
-            onClick={() => selectDay(day, isCurrentMonth)}
-          >
-            {day}
-          </div>
-        ))}
+        {calendarDays.map(({ day, isCurrentMonth }, i) => {
+          const isFuture = isFutureDay(day, isCurrentMonth);
+
+          return (
+            <div
+              key={i}
+              className={`${s.calendarDay} ${isCurrentMonth ? s.currentMonth : s.otherMonth} ${isDaySelected(day, isCurrentMonth) ? s.selected : ""} ${isFuture ? s.disabledFuture : ""}`}
+              onClick={() => selectDay(day, isCurrentMonth)}
+              aria-disabled={isFuture}
+            >
+              {day}
+            </div>
+          );
+        })}
       </div>
 
       {selectedDate && (
