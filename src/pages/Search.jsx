@@ -28,14 +28,24 @@ export default function Search() {
 
   const handleApply = () => {
     const nq = norm(query).trim();
+
     const filtered = transactions
       .filter((t) => {
-        const noteOk = nq === "" ? true : norm(t.note || "").startsWith(nq);
+        const noteText = norm(t.note || "");
+        const categoryText = norm(t.category || "");
+
+        const textOk =
+          nq === ""
+            ? true
+            : noteText.includes(nq) || categoryText.includes(nq);
+
         const typeOk = type === "all" ? true : t.type === type;
         const catOk = category ? t.category === category : true;
-        return noteOk && typeOk && catOk;
+
+        return textOk && typeOk && catOk;
       })
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
     setResults(filtered);
   };
 
@@ -54,7 +64,7 @@ export default function Search() {
         <div className={layout.placeholder} style={{ paddingBottom: 8 }}>
           <input
             className={layout.searchInput}
-            placeholder="Buscar por nota..."
+            placeholder="Buscar por nota o categoría..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
