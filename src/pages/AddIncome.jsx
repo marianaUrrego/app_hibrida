@@ -6,6 +6,7 @@ import {
   FiDollarSign, FiBarChart2, FiClock, FiGift, FiMoreHorizontal,
   FiMenu, FiCalendar, FiDelete, FiCheck
 } from "react-icons/fi";
+import { evalExpr, formatAmount } from "../utils/amountMath.js";
 
 const CATS = [
   { key: "salary", label: "Salario",         Icon: FiDollarSign },
@@ -14,43 +15,6 @@ const CATS = [
   { key: "prize",  label: "Premios",         Icon: FiGift },
   { key: "more", label: "Otros", Icon: FiMoreHorizontal },
 ];
-
-function evalExpr(expr) {
-  const clean = expr.replace(/\s+/g, "");
-  if (!/^[0-9.+\-]+$/.test(clean)) return NaN;
-  const tokens = clean.match(/(\d+(\.\d+)?|[+\-])/g) || [];
-  let total = 0, op = "+";
-  for (const tk of tokens) {
-    if (tk === "+" || tk === "-") { op = tk; continue; }
-    const n = parseFloat(tk);
-    if (Number.isNaN(n)) return NaN;
-    total = op === "+" ? total + n : total - n;
-  }
-  return total;
-}
-
-function formatAmount(expr) {
-  const clean = expr.replace(/[^\d.]/g, "");
-  if (!clean || clean === "0") return "0";
-  
-  const parts = clean.split(".");
-  let integer = parts[0];
-  let decimal = parts[1] ? "," + parts[1] : "";
-  
-  // Formatear miles y millones con punto como separador
-  if (integer.length > 3) {
-    let formattedInteger = "";
-    for (let i = 0; i < integer.length; i++) {
-      formattedInteger += integer[i];
-      if ((integer.length - 1 - i) % 3 === 0 && (integer.length - 1 - i) !== 0) {
-        formattedInteger += ".";
-      }
-    }
-    integer = formattedInteger;
-  }
-  
-  return integer + decimal;
-}
 
 export default function AddIncome() {
   const navigate   = useNavigate();
