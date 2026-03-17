@@ -1,0 +1,39 @@
+@use '../styles/variables' as *;
+
+.splash {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  background: $cream;
+  overflow: hidden;
+}
+
+.logoLarge {
+  width: 82%;
+  max-width: 500px;
+  animation: pop 900ms ease-out both;
+  filter: drop-shadow(0 12px 30px rgba(0,0,0,.12));
+}
+
+.appIcon {
+  position: absolute;
+  bottom: 86px;
+  width: 72px; height: 72px;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+  animation: up 900ms 300ms ease-out both;
+}
+
+.fade {
+  position: absolute; inset: 0;
+  background: radial-gradient(800px 300px at 50% 90%, transparent 0%, rgba(0,0,0,0.06) 100%);
+  pointer-events: none;
+}
+
+@keyframes pop {
+  0% { transform: scale(.92); opacity: 0; }
+  60% { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1); }
+}
+@keyframes up {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}

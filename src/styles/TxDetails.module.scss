@@ -1,0 +1,122 @@
+@use './variables' as *;
+
+.screen{
+  min-height: 100%;
+  background: #fff;
+  color: $fg;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar{
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid $line;
+}
+.back{
+  border: 0;
+  background: transparent;
+  display: grid; place-items: center;
+  font-size: 22px;
+  color: $icon;
+}
+.title{
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(16px, 1.8vw, 18px);
+  font-family: 'Offside', sans-serif;
+}
+
+.body{
+  padding: 16px clamp(14px, 4vw, 20px) 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero{
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.circle{
+  width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center;
+  box-shadow: $shadow;
+  font-size: 24px;
+  color: #1f2937;
+}
+.expense{ background: $yellow; }
+.income { background: $blue; color:#fff; }
+
+.heroTitle{
+  font-weight: 800;
+  font-size: clamp(20px, 4.8vw, 26px);
+  line-height: 1.05;
+  font-family: 'Offside', sans-serif;
+}
+
+.group{ margin-top: 4px; border-top: 1px solid $line; }
+.row{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid $line;
+}
+.label{
+  color: $muted;
+  font-size: 14px;
+  font-family: 'Offside', sans-serif;
+}
+.value{
+  font-weight: 800;
+  font-size: 15px;
+  text-align: right;
+  color: $fg;
+  word-break: break-word;
+  font-family: 'Offside', sans-serif;
+}
+.valueStrong{
+  display: inline-block;
+  font-weight: 900;
+  font-size: clamp(15px, 3.8vw, 18px);
+  font-family: 'Offside', sans-serif;
+}
+.sub{
+  display: block;
+  color: $muted;
+  font-size: 12px;
+  margin-top: 2px;
+  font-family: 'Offside', sans-serif;
+}
+
+.footer{
+  margin-top: auto;
+  padding: 12px clamp(14px, 4vw, 16px);
+  border-top: 1px solid $line;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 12px);
+}
+.btn{
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-weight: 800;
+  background: #eef2f7;
+  color: $fg;
+  font-family: 'Offside', sans-serif;
+}
+.danger{
+  background: #ef4444;
+  color: #fff;
+}

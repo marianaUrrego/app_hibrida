@@ -1,122 +1,152 @@
-import React, { useState } from "react";
-import Calendar from "react-calendar";
-import Select from "react-select";
-import "react-calendar/dist/Calendar.css";
-import layout from "../styles/Layout.module.scss";
+import React, { useState, useEffect } from "react";
+import s from "./Calendar.module.scss";
 
-function CalendarComponent() {
-  const [date, setDate] = useState(new Date());
+function CalendarComponent({ value, onChange }) {
+  const [currentDate, setCurrentDate] = useState(value ?? new Date());
+  const [selectedDate, setSelectedDate] = useState(value ?? null);
+  const [showMonthSelector, setShowMonthSelector] = useState(false);
+  const [showYearSelector, setShowYearSelector] = useState(false);
+
+  useEffect(() => {
+    if (value) {
+      setCurrentDate(value);
+      setSelectedDate(value);
+    }
+  }, [value]);
+
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+
+  const monthNames = [
+    "Enero","Febrero","Marzo","Abril","Mayo","Junio",
+    "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+  ];
+  const weekDays = ["D","L","M","X","J","V","S"];
 
   const years = [];
-  for (let y = 2000; y <= 2030; y++) years.push({ value: y, label: y });
+  for (let y = 2000; y <= 2030; y++) years.push(y);
 
-  const months = [
-    { value: 0, label: "Ene" },
-    { value: 1, label: "Feb" },
-    { value: 2, label: "Mar" },
-    { value: 3, label: "Abr" },
-    { value: 4, label: "May" },
-    { value: 5, label: "Jun" },
-    { value: 6, label: "Jul" },
-    { value: 7, label: "Ago" },
-    { value: 8, label: "Sep" },
-    { value: 9, label: "Oct" },
-    { value: 10, label: "Nov" },
-    { value: 11, label: "Dic" },
-  ];
-
-  const navigationLabel = ({ date, view }) => {
-    if (view === "month") {
-      const year = date.getFullYear();
-      const month = date.getMonth();
-
-      return (
-        <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-          <Select
-            value={months.find((m) => m.value === month)}
-            onChange={(option) => {
-              const newDate = new Date(date);
-              newDate.setMonth(option.value);
-              setDate(newDate);
-            }}
-            options={months}
-            isSearchable={false}
-            styles={{
-              control: (base) => ({
-                ...base,
-                minWidth: 80,
-                background: "none",
-                border: "none",
-                boxShadow: "none",
-                fontWeight: "bold",
-                fontSize: "1em",
-              }),
-              dropdownIndicator: (base) => ({
-                ...base,
-                color: "#222",
-              }),
-              menu: (base) => ({
-                ...base,
-                zIndex: 9999,
-              }),
-            }}
-          />
-          <Select
-            value={years.find((y) => y.value === year)}
-            onChange={(option) => {
-              const newDate = new Date(date);
-              newDate.setFullYear(option.value);
-              setDate(newDate);
-            }}
-            options={years}
-            isSearchable={false}
-            styles={{
-              control: (base) => ({
-                ...base,
-                minWidth: 70,
-                background: "none",
-                border: "none",
-                boxShadow: "none",
-                fontWeight: "bold",
-                fontSize: "1em",
-              }),
-              dropdownIndicator: (base) => ({
-                ...base,
-                color: "#222",
-              }),
-              menu: (base) => ({
-                ...base,
-                zIndex: 9999,
-              }),
-            }}
-          />
-        </div>
-      );
-    }
-    return null;
+  const startOfDay = (d) => {
+    const x = new Date(d);
+    x.setHours(0, 0, 0, 0);
+    return x;
   };
 
-  const formatShortWeekday = (locale, date) =>
-    date.toLocaleDateString(locale, { weekday: "narrow" });
+  const today = startOfDay(new Date());
+
+  const getFirstDayOfMonth = (year, month) => new Date(year, month, 1).getDay();
+  const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
+
+  const goToPreviousMonth = () => setCurrentDate(new Date(currentYear, currentMonth - 1, 1));
+  const goToNextMonth = () => {
+    const nextMonthDate = new Date(currentYear, currentMonth + 1, 1);
+    const currentRealMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    if (nextMonthDate > currentRealMonth) return;
+
+    setCurrentDate(nextMonthDate);
+  };
+
+  const changeMonth = (idx) => { setCurrentDate(new Date(currentYear, idx, 1)); setShowMonthSelector(false); };
+  const changeYear = (y) => { setCurrentDate(new Date(y, currentMonth, 1)); setShowYearSelector(false); };
+
+  const isFutureDay = (day, isCurrentMonth) => {
+    if (!isCurrentMonth) return false;
+    const d = startOfDay(new Date(currentYear, currentMonth, day));
+    return d > today;
+  };
+
+  const selectDay = (day, isCurrentMonth) => {
+    if (!isCurrentMonth) return;
+
+    const d = startOfDay(new Date(currentYear, currentMonth, day));
+    if (d > today) return;
+
+    setSelectedDate(d);
+    onChange?.(d);
+  };
+
+  const generateCalendarDays = () => {
+    const days = [];
+    const firstDay = getFirstDayOfMonth(currentYear, currentMonth);
+    const totalDays = getDaysInMonth(currentYear, currentMonth);
+    const prevMonthDays = getDaysInMonth(currentYear, currentMonth - 1);
+
+    for (let i = firstDay - 1; i >= 0; i--) days.push({ day: prevMonthDays - i, isCurrentMonth: false });
+    for (let d = 1; d <= totalDays; d++) days.push({ day: d, isCurrentMonth: true });
+    const remaining = 42 - days.length;
+    for (let d = 1; d <= remaining; d++) days.push({ day: d, isCurrentMonth: false });
+
+    return days;
+  };
+  const calendarDays = generateCalendarDays();
+
+  const isDaySelected = (day, isCurrentMonth) =>
+    selectedDate && isCurrentMonth &&
+    selectedDate.getDate() === day &&
+    selectedDate.getMonth() === currentMonth &&
+    selectedDate.getFullYear() === currentYear;
 
   return (
-    <div className={layout.content}>
-      <Calendar
-        onChange={setDate}
-        value={date}
-        view="month"
-        minDetail="decade"
-        maxDetail="month"
-        showNeighboringMonth={false}
-        locale="es-ES"
-        prevLabel={null} // Quita flecha <
-        nextLabel={null} // Quita flecha >
-        next2Label={null} // Quita flechas >>
-        prev2Label={null} // Quita flechas <<
-        navigationLabel={navigationLabel}
-        formatShortWeekday={formatShortWeekday}
-        className="react-calendar"
-      />
+    <div className={s.calendarContainer}>
+      <div className={s.calendarHeader}>
+        <button className={s.navButton} onClick={goToPreviousMonth}>‹</button>
+        <h2 className={s.calendarTitle}>Calendario</h2>
+        <div className={s.monthYearSelector}>
+          <div className={s.monthSelector}>
+            <span className={s.monthYear} onClick={() => setShowMonthSelector(!showMonthSelector)}>
+              {monthNames[currentMonth]}
+            </span>
+            {showMonthSelector && (
+              <div className={s.dropdownMenu}>
+                {monthNames.map((m, i) => (
+                  <div key={i} className={`${s.dropdownItem} ${i === currentMonth ? s.active : ""}`} onClick={() => changeMonth(i)}>{m}</div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className={s.yearSelector}>
+            <span className={s.monthYear} onClick={() => setShowYearSelector(!showYearSelector)}>
+              {currentYear}
+            </span>
+            {showYearSelector && (
+              <div className={s.dropdownMenu}>
+                {years.map((y) => (
+                  <div key={y} className={`${s.dropdownItem} ${y === currentYear ? s.active : ""}`} onClick={() => changeYear(y)}>{y}</div>
+                ))}
+              </div>
+            )}
+          </div>
+          <span className={s.dropdownArrow}>▼</span>
+        </div>
+      </div>
+
+      <div className={s.weekDays}>
+        {weekDays.map((d, i) => <div key={i} className={s.weekDay}>{d}</div>)}
+      </div>
+
+      <div className={s.calendarGrid}>
+        {calendarDays.map(({ day, isCurrentMonth }, i) => {
+          const isFuture = isFutureDay(day, isCurrentMonth);
+
+          return (
+            <div
+              key={i}
+              className={`${s.calendarDay} ${isCurrentMonth ? s.currentMonth : s.otherMonth} ${isDaySelected(day, isCurrentMonth) ? s.selected : ""} ${isFuture ? s.disabledFuture : ""}`}
+              onClick={() => selectDay(day, isCurrentMonth)}
+              aria-disabled={isFuture}
+            >
+              {day}
+            </div>
+          );
+        })}
+      </div>
+
+      {selectedDate && (
+        <div className={s.selectedDateInfo}>
+          Fecha seleccionada: {selectedDate.toLocaleDateString("es-ES", { weekday:"long", year:"numeric", month:"long", day:"numeric" })}
+        </div>
+      )}
     </div>
   );
 }

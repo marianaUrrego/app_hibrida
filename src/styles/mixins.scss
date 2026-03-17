@@ -1,3 +1,39 @@
-@mixin center { display: grid; place-items: center; }
-@mixin text-sm { font-size: 12px; }
-@mixin elevation { box-shadow: $shadow; }
+// === Centrados ===
+@mixin center {
+    display: grid;
+    place-items: center;
+  }
+  
+  @mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  // === Tipografías ===
+  @mixin text-sm   { font-size: 12px; }
+  @mixin text-base { font-size: 14px; }
+  @mixin text-lg   { font-size: 16px; }
+  
+  // === Estética / utilidades ===
+  @mixin elevation {
+    box-shadow: $shadow;
+  }
+  
+  @mixin button-reset {
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  
+  @mixin rounded($radius: 12px) {
+    border-radius: $radius;
+  }
+  
+  @mixin transition($prop: all, $time: .2s, $ease: ease-in-out) {
+    transition: $prop $time $ease;
+  }  

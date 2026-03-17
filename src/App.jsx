@@ -1,19 +1,49 @@
-import { BrowserRouter, Routes, Route } from "react-router";
-import Home from './pages/Home.jsx'
-import Profile from './pages/Profile.jsx'
-import Search from './pages/Search.jsx'
-import DeviceFrame from './components/DeviceFrame.jsx'
+import { useEffect, useState } from "react";
+import { BrowserRouter, HashRouter, Routes, Route, Navigate } from "react-router";
+import { Capacitor } from "@capacitor/core";
+import DeviceFrame from "./components/DeviceFrame.jsx";
+import AppShell from "./components/AppShell.jsx";
+import Home from "./pages/Home.jsx";
+import Search from "./pages/Search.jsx";
+import Profile from "./pages/Profile.jsx";
+import AddExpenses from "./pages/AddExpenses.jsx";
+import AddIncome from "./pages/AddIncome.jsx";
+import Splash from "./pages/Splash.jsx";
+import TxDetails from "./pages/TxDetails.jsx";
+import TxEdit from "./pages/TxEdit.jsx";
+import CalendarPage from "./pages/Calendar.jsx";
 
 export default function App() {
+  const [ready, setReady] = useState(false);
+  const isNative = Capacitor.isNativePlatform();
+  const Router = isNative ? HashRouter : BrowserRouter;
+
+  useEffect(() => {
+    const t = setTimeout(() => setReady(true), 1500);
+    return () => clearTimeout(t);
+  }, []);
+
+  const routes = !ready ? (
+    <Splash />
+  ) : (
+    <Routes>
+      <Route path="/" element={<Navigate to="/home" replace />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/buscar" element={<Search />} />
+      <Route path="/yo" element={<Profile />} />
+      <Route path="/add/expense" element={<AddExpenses />} />
+      <Route path="/add/income" element={<AddIncome />} />
+      <Route path="/tx/:id" element={<TxDetails />} />
+      <Route path="/tx/:id/edit" element={<TxEdit />} />
+      <Route path="/calendar" element={<CalendarPage />} />
+    </Routes>
+  );
+
+  const appContent = <AppShell>{routes}</AppShell>;
+
   return (
-    <DeviceFrame>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/buscar" element={<Search />} />
-          <Route path="/yo" element={<Profile />} />
-        </Routes>
-      </BrowserRouter>
-    </DeviceFrame>
-  )
+    <Router>
+      {isNative ? appContent : <DeviceFrame>{appContent}</DeviceFrame>}
+    </Router>
+  );
 }

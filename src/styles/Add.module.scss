@@ -1,0 +1,148 @@
+@use './variables' as *;
+
+
+.screen{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: #fff;
+  color: $fg;
+  font-family: 'Offside', sans-serif;
+  overflow: hidden;       
+  padding: 10px 14px 10px;
+  box-sizing: border-box;
+}
+
+
+.body{
+  flex: 1 1 auto;
+  overflow: auto;
+  padding-bottom: 6px;  
+}
+
+
+.topbar{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 2px 10px;
+  border-bottom: 1px solid $line; 
+}
+.link{ justify-self: start;  background: transparent; border: 0; font-weight: 800; font-size: 18px; font-family: 'Offside', sans-serif; }
+.title{ justify-self: center; font-weight: 800; font-size: 18px; letter-spacing: .2px; font-family: 'Offside', sans-serif; }
+.logo{ justify-self: end; width: 20px; height: 20px; border-radius: 4px; object-fit: contain; }
+
+
+.segmented{
+  display: flex; gap: 12px; margin: 12px 2px 16px;
+}
+.seg{
+  height: 42px; padding: 0 16px; border-radius: 14px;
+  border: 1px solid $line; background: #f3f5f7; color: $fg;
+  font-weight: 800; font-size: 16px; white-space: nowrap; font-family: 'Offside', sans-serif;
+}
+.active{ background: #111; color: #fff; border-color: #111; }
+
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 16px;
+  margin: 4px 2px 10px;
+}
+
+.cat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.catIcon {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #0c0c0d;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(0,0,0,.16);
+
+  svg {
+    font-size: 24px;
+  }
+}
+
+.catIcon::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(0,0,0,.06);
+  pointer-events: none;
+}
+
+.catGold .catIcon {
+  background: $gold;
+  color: #2b2b2b;
+}
+
+.catActive .catIcon {
+  background: $yellow;
+  color: $fg;
+  outline: none;
+}
+
+.catLabel {
+  text-align: center;
+  white-space: pre-line;
+  font-size: 11px;
+  line-height: 1.05;
+  font-weight: 800;
+  color: $fg;
+  font-family: 'Offside', sans-serif;
+}
+
+.catActive .catLabel {
+  color: $yellow;
+}
+
+.divider{ height:1px; background:$line; opacity:.9; margin: 8px 0 10px; }
+
+
+.amountRow{
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 2px 6px;
+}
+.iconBtn{
+  width: 36px; height: 28px; display: grid; place-items: center;
+  border: 0; background: transparent; color: $blue; font-size: 20px;
+}
+.amount{ font-size: 22px; font-weight: 900; color: $blue; letter-spacing: .5px; font-family: 'Offside', sans-serif; }
+
+
+.noteWrap{ padding: 6px 0 10px; }
+.note{
+  width: 100%; height: 44px; padding: 0 14px;
+  border: 1px solid $line; border-radius: 12px;
+  background: #f7fafc; font-size: 14px; font-family: 'Offside', sans-serif;
+}
+
+
+.pad{
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-top: 10px; padding-bottom: 6px;
+}
+.pad > button{
+  height: 56px; border-radius: 14px; border: none;
+  font-size: 20px; font-weight: 900; color: #121926;
+  background: #fbfdff;
+  box-shadow: 6px 10px 18px rgba(0,0,0,.10), inset 0 0 0 1px rgba(0,0,0,.03); font-family: 'Offside', sans-serif;
+}
+.ghost{ background: #eef3f7; font-size: 19px; font-family: 'Offside', sans-serif; }
+.ok{ background: $yellow; color: #1f2937; display: grid; place-items: center; font-size: 20px; font-weight: 900; font-family: 'Offside', sans-serif; }

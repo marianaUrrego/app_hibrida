@@ -1,0 +1,235 @@
+@use "../styles/variables" as *;
+
+.calendarContainer {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: $shadow;
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $line;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: $fg;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color .2s ease;
+  font-family: 'Offside', sans-serif;
+
+  &:hover { background-color: #f5f5f5; }
+}
+
+.calendarTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: $fg;
+  margin: 0;
+  font-family: 'Offside', sans-serif;
+}
+
+.monthYearSelector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color .2s ease;
+  position: relative;
+  font-family: 'Offside', sans-serif;
+
+  &:hover { background-color: #f5f5f5; }
+}
+
+.monthSelector,
+.yearSelector { position: relative; }
+
+.monthYear {
+  font-size: 14px;
+  font-weight: 700;
+  color: $fg;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color .2s ease;
+  font-family: 'Offside', sans-serif;
+
+  &:hover { background-color: #f0f0f0; }
+}
+
+.dropdownArrow {
+  font-size: 10px;
+  color: $muted;
+  font-family: 'Offside', sans-serif;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid $line;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  z-index: 1000;
+  min-width: 96px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.dropdownItem {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color .2s ease;
+  font-size: 14px;
+  color: $fg;
+  font-family: 'Offside', sans-serif;
+
+  &:hover { background-color: #f5f5f5; }
+
+  &.active {
+    background-color: $blue;
+    color: #fff;
+    font-weight: 800;
+  }
+}
+
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+  background-color: $cream;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid $line;
+}
+
+.weekDay {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: $fg;
+  padding: 8px 4px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  font-family: 'Offside', sans-serif;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.calendarDay {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .2s ease;
+  font-family: 'Offside', sans-serif;
+
+  &.currentMonth {
+    color: $fg;
+
+    &:hover { background-color: #f5f5f5; }
+  }
+
+  &.otherMonth { color: #c7cbd1; }
+
+  &.disabledFuture {
+    color: #c7cbd1;
+    background-color: #f8f9fb;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover {
+      background-color: #f8f9fb;
+    }
+  }
+
+  &.selected {
+    background-color: $yellow;
+    color: #1f2937;
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,.06);
+  }
+}
+
+.selectedDateInfo {
+  margin-top: 16px;
+  padding: 12px;
+  background-color: $cream;
+  border-radius: 8px;
+  font-size: 14px;
+  color: $fg;
+  text-align: center;
+  border: 1px solid $line;
+  font-family: 'Offside', sans-serif;
+}
+
+.scrim{
+  position: fixed;
+  inset: 0;
+  background: transparent; 
+  z-index: 49;
+}
+
+.menu{
+  position: fixed;
+  bottom: 92px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid $line;
+  border-radius: 12px;
+  box-shadow: $shadow;
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+  width: 200px;
+  z-index: 50;
+}
+
+.menuBtn{
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid $line;
+  background: #fff;
+  color: $fg;
+  font-weight: 800;
+  text-align: center;
+  transition: background .15s ease, transform .05s ease;
+  font-family: 'Offside', sans-serif;
+
+  &:hover{ background: $cream; }
+  &:active{ transform: scale(.99); }
+}
+
+@media (max-width: 480px) {
+  .calendarContainer { padding: 16px; margin: 16px; }
+  .calendarHeader { margin-bottom: 16px; }
+  .weekDays { gap: 6px; }
+  .calendarGrid { gap: 6px; }
+  .calendarDay { font-size: 13px; }
+  .dropdownMenu { min-width: 80px; }
+}

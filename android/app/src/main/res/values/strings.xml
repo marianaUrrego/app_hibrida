@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">LukApp</string>
+    <string name="title_activity_main">LukApp</string>
+    <string name="package_name">co.edu.upb.lukapp</string>
+    <string name="custom_url_scheme">co.edu.upb.lukapp</string>
+</resources>

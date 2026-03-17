@@ -1,6 +1,7 @@
 import { NavLink } from "react-router";
 import { FiSearch, FiCalendar } from "react-icons/fi";
-import s from './TopBar.module.scss';
+import s from "./TopBar.module.scss";
+import logo from "../assets/app-icon.png";
 
 export default function TopBar({ onCalendarClick }) {
   return (
@@ -17,8 +18,8 @@ export default function TopBar({ onCalendarClick }) {
           <FiCalendar className={s.icon} />
         </button>
       </div>
+
       <h1 className={s.title}>LukApp</h1>
-      <div className={s.side} />
     </header>
   );
 }
