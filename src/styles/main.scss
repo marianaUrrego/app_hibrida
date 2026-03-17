@@ -9,4 +9,6 @@ body {
   font-family: 'Offside', sans-serif;
   color: $fg;
   background: $cream;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

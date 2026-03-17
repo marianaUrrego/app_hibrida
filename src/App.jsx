@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { BrowserRouter, HashRouter, Routes, Route, Navigate } from "react-router";
 import { Capacitor } from "@capacitor/core";
 import DeviceFrame from "./components/DeviceFrame.jsx";
+import AppShell from "./components/AppShell.jsx";
 import Home from "./pages/Home.jsx";
 import Search from "./pages/Search.jsx";
 import Profile from "./pages/Profile.jsx";
@@ -15,13 +16,14 @@ import CalendarPage from "./pages/Calendar.jsx";
 export default function App() {
   const [ready, setReady] = useState(false);
   const isNative = Capacitor.isNativePlatform();
+  const Router = isNative ? HashRouter : BrowserRouter;
 
   useEffect(() => {
     const t = setTimeout(() => setReady(true), 1500);
     return () => clearTimeout(t);
   }, []);
 
-  const appContent = !ready ? (
+  const routes = !ready ? (
     <Splash />
   ) : (
     <Routes>
@@ -37,9 +39,11 @@ export default function App() {
     </Routes>
   );
 
+  const appContent = <AppShell>{routes}</AppShell>;
+
   return (
-    <BrowserRouter>
+    <Router>
       {isNative ? appContent : <DeviceFrame>{appContent}</DeviceFrame>}
-    </BrowserRouter>
+    </Router>
   );
 }

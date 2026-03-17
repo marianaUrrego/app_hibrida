@@ -29,6 +29,29 @@ function evalExpr(expr) {
   return total;
 }
 
+function formatAmount(expr) {
+  const clean = expr.replace(/[^\d.]/g, "");
+  if (!clean || clean === "0") return "0";
+  
+  const parts = clean.split(".");
+  let integer = parts[0];
+  let decimal = parts[1] ? "," + parts[1] : "";
+  
+  // Formatear miles y millones con punto como separador
+  if (integer.length > 3) {
+    let formattedInteger = "";
+    for (let i = 0; i < integer.length; i++) {
+      formattedInteger += integer[i];
+      if ((integer.length - 1 - i) % 3 === 0 && (integer.length - 1 - i) !== 0) {
+        formattedInteger += ".";
+      }
+    }
+    integer = formattedInteger;
+  }
+  
+  return integer + decimal;
+}
+
 export default function AddExpenses() {
   const navigate   = useNavigate();
   const location   = useLocation();
@@ -108,7 +131,7 @@ export default function AddExpenses() {
           <>
             <div className={s.amountRow}>
               <button className={s.iconBtn}><FiMenu/></button>
-              <div className={s.amount}>{expr}</div>
+              <div className={s.amount}>{formatAmount(expr)}</div>
             </div>
 
             <div className={s.noteWrap}>
