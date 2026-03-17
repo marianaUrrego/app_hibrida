@@ -4,28 +4,30 @@ import s from "../styles/Add.module.scss";
 import { useAppStore } from "../store/useAppStore.js";
 import {
   FiDollarSign, FiBarChart2, FiClock, FiGift, FiMoreHorizontal,
-  FiMenu, FiCalendar, FiDelete, FiCheck
+  FiMenu
 } from "react-icons/fi";
 import { evalExpr, formatAmount } from "../utils/amountMath.js";
+import { pressAmountKey } from "../utils/amountInput.js";
+import NumberPad from "../components/NumberPad.jsx";
 
 const CATS = [
-  { key: "salary", label: "Salario",         Icon: FiDollarSign },
-  { key: "inv",    label: "Inversiones",     Icon: FiBarChart2 },
-  { key: "part",   label: "Tiempo\nparcial", Icon: FiClock },
-  { key: "prize",  label: "Premios",         Icon: FiGift },
+  { key: "salary", label: "Salario", Icon: FiDollarSign },
+  { key: "inv", label: "Inversiones", Icon: FiBarChart2 },
+  { key: "part", label: "Tiempo\nparcial", Icon: FiClock },
+  { key: "prize", label: "Premios", Icon: FiGift },
   { key: "more", label: "Otros", Icon: FiMoreHorizontal },
 ];
 
 export default function AddIncome() {
-  const navigate   = useNavigate();
-  const location   = useLocation();
-  const returnTo   = location.state?.from || "/home";
+  const navigate = useNavigate();
+  const location = useLocation();
+  const returnTo = location.state?.from || "/home";
   const preDateISO = location.state?.dateISO || new Date().toISOString();
 
-  const [cat, setCat]   = useState(null);
+  const [cat, setCat] = useState(null);
   const [note, setNote] = useState("");
   const [expr, setExpr] = useState("0");
-  const addTransaction  = useAppStore((s) => s.addTransaction);
+  const addTransaction = useAppStore((s) => s.addTransaction);
 
   const toggleCat = (key) => {
     setCat((prev) => (prev === key ? null : key));
@@ -33,14 +35,12 @@ export default function AddIncome() {
   };
 
   const press = (v) => {
-    if (v === "DEL") { setExpr((p) => (p.length > 1 ? p.slice(0, -1) : "0")); return; }
-    if (v === ".")  { setExpr((p) => (p.includes(".") && /[0-9.]+$/.test(p) ? p : p + ".")); return; }
-    if (v === "+" || v === "-") { setExpr((p) => (/[+\-]$/.test(p) ? p.slice(0, -1) + v : p + v)); return; }
-    setExpr((p) => (p === "0" ? v : p + v));
+    setExpr((prev) => pressAmountKey(prev, v));
   };
 
   const handleOk = () => {
     if (!cat) return;
+
     const amount = evalExpr(expr);
     const valid = Number.isFinite(amount) ? Math.abs(amount) : 0;
     if (valid <= 0) return;
@@ -51,7 +51,7 @@ export default function AddIncome() {
       category: cat,
       amount: valid,
       note,
-      createdAt: preDateISO, // ← fecha elegida (o hoy)
+      createdAt: preDateISO,
     });
 
     navigate(returnTo);
@@ -80,13 +80,13 @@ export default function AddIncome() {
           {CATS.map(({ key, label, Icon }) => (
             <button
               key={key}
-              className={`${s.cat} ${cat===key ? s.catActive : ""}`}
+              className={`${s.cat} ${cat === key ? s.catActive : ""}`}
               onClick={() => toggleCat(key)}
             >
-              <span className={s.catIcon}><Icon/></span>
+              <span className={s.catIcon}><Icon /></span>
               <span
                 className={s.catLabel}
-                dangerouslySetInnerHTML={{ __html: label.replace("\n","<br/>") }}
+                dangerouslySetInnerHTML={{ __html: label.replace("\n", "<br/>") }}
               />
             </button>
           ))}
@@ -97,7 +97,7 @@ export default function AddIncome() {
         {cat && (
           <>
             <div className={s.amountRow}>
-              <button className={s.iconBtn}><FiMenu/></button>
+              <button className={s.iconBtn}><FiMenu /></button>
               <div className={s.amount}>{formatAmount(expr)}</div>
             </div>
 
@@ -106,31 +106,11 @@ export default function AddIncome() {
                 className={s.note}
                 placeholder="Nota:"
                 value={note}
-                onChange={(e)=>setNote(e.target.value)}
+                onChange={(e) => setNote(e.target.value)}
               />
             </div>
 
-            <div className={s.pad}>
-              <button onClick={()=>press("7")}>7</button>
-              <button onClick={()=>press("8")}>8</button>
-              <button onClick={()=>press("9")}>9</button>
-              <button className={s.ghost}><FiCalendar/></button>
-
-              <button onClick={()=>press("4")}>4</button>
-              <button onClick={()=>press("5")}>5</button>
-              <button onClick={()=>press("6")}>6</button>
-              <button className={s.ghost} onClick={()=>press("+")}>+</button>
-
-              <button onClick={()=>press("1")}>1</button>
-              <button onClick={()=>press("2")}>2</button>
-              <button onClick={()=>press("3")}>3</button>
-              <button className={s.ghost} onClick={()=>press("-")}>−</button>
-
-              <button onClick={()=>press(".")}>·</button>
-              <button onClick={()=>press("0")}>0</button>
-              <button className={s.ghost} onClick={()=>press("DEL")}><FiDelete/></button>
-              <button className={s.ok} onClick={handleOk}><FiCheck/></button>
-            </div>
+            <NumberPad onPress={press} onConfirm={handleOk} />
           </>
         )}
       </div>
